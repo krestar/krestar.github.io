@@ -101,12 +101,17 @@ main::after { content: ""; display: block; height: var(--nav-height); pointer-ev
 }
 
 @media (max-width: 899px) {
-  html { scroll-snap-type:y proximity; overscroll-behavior-y:auto; }
-  [data-snap] { scroll-snap-stop:normal; }
+  html { scroll-snap-type:none; overscroll-behavior-y:auto; }
+  [data-snap] { scroll-snap-align:none; scroll-snap-stop:normal; }
   main::after { height:0; }
   .project-description { font-size:clamp(.98rem,2.3vw,1.08rem); }
   .timeline-item { grid-template-columns:1fr; gap:1.3rem; }
   .timeline-period { grid-template-columns:auto minmax(40px,1fr) auto; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  html { scroll-snap-type:none !important; overscroll-behavior-y:auto; }
+  [data-snap] { scroll-snap-align:none; scroll-snap-stop:normal; }
 }
 
 @media (max-width: 680px) {

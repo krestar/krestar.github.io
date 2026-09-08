@@ -1,39 +1,37 @@
 ---
 const { kind = 'slotq' } = Astro.props;
+
+const config = {
+  slotq: {
+    label: 'SlotQ flow: reservation, waitlist, events, and recovery',
+    index: '01 / PRODUCT FLOW',
+    nodes: ['RESERVATION', 'WAITLIST', 'EVENT', 'RECOVERY']
+  },
+  uctale: {
+    label: 'UCTale flow: turn, state, memory, and LLM narrative',
+    index: '02 / GAME STATE',
+    nodes: ['TURN', 'STATE', 'MEMORY', 'LLM']
+  },
+  fowoco: {
+    label: 'FOWOCO data boundary: tenant, RLS, PostgreSQL, and timeout protection',
+    index: '03 / DATA BOUNDARY',
+    nodes: ['TENANT', 'RLS', 'POSTGRESQL', 'TIMEOUT']
+  }
+}[kind] ?? {
+  label: 'System flow',
+  index: 'SYSTEM FLOW',
+  nodes: ['INPUT', 'STATE', 'PROCESS', 'OUTPUT']
+};
 ---
-{kind === 'slotq' && (
-  <div class="system-visual" role="img" aria-label="SlotQ system concept: reservation, queue, operations, and data">
-    <span class="node node-a">RESERVATION</span>
-    <span class="node node-b">QUEUE</span>
-    <span class="node node-c">OPERATIONS</span>
-    <span class="node node-d">DATA</span>
-    <span class="path path-ab" aria-hidden="true"></span>
-    <span class="path path-ac" aria-hidden="true"></span>
-    <span class="path path-cd" aria-hidden="true"></span>
-    <span class="visual-index" aria-hidden="true">01 / SYSTEM FLOW</span>
-  </div>
-)}
-{kind === 'uctale' && (
-  <div class="system-visual compact" role="img" aria-label="UCTale system concept: action, rules, state, and narrative">
-    <span class="node node-a">ACTION</span>
-    <span class="node node-b">RULES</span>
-    <span class="node node-c">STATE</span>
-    <span class="node node-d">NARRATIVE</span>
-    <span class="path path-ab" aria-hidden="true"></span>
-    <span class="path path-ac" aria-hidden="true"></span>
-    <span class="path path-cd" aria-hidden="true"></span>
-    <span class="visual-index" aria-hidden="true">02 / SERVER-OWNED STATE</span>
-  </div>
-)}
-{kind === 'fowoco' && (
-  <div class="system-visual compact muted" role="img" aria-label="FOWOCO data boundary concept: PostgreSQL, row-level security, tenant, and safety">
-    <span class="node node-a">POSTGRESQL</span>
-    <span class="node node-b">RLS</span>
-    <span class="node node-c">TENANT</span>
-    <span class="node node-d">SAFETY</span>
-    <span class="path path-ab" aria-hidden="true"></span>
-    <span class="path path-ac" aria-hidden="true"></span>
-    <span class="path path-cd" aria-hidden="true"></span>
-    <span class="visual-index" aria-hidden="true">03 / DATA BOUNDARY</span>
-  </div>
-)}
+<div class:list={['system-visual', kind !== 'slotq' && 'compact', kind === 'fowoco' && 'muted']} role="img" aria-label={config.label}>
+  <span class="node node-a">{config.nodes[0]}</span>
+  <span class="node node-b">{config.nodes[1]}</span>
+  <span class="node node-c">{config.nodes[2]}</span>
+  <span class="node node-d">{config.nodes[3]}</span>
+  <span class="path path-ab" aria-hidden="true"><span class="signal signal-one"></span></span>
+  <span class="path path-ac" aria-hidden="true"><span class="signal signal-two"></span></span>
+  <span class="path path-cd" aria-hidden="true"><span class="signal signal-three"></span></span>
+  <span class="diagram-cursor" aria-hidden="true"><span class="diagram-cursor-x"></span><span class="diagram-cursor-y"></span></span>
+  <span class="diagram-readout mono" data-diagram-readout aria-hidden="true">IDLE / {config.nodes[0]}</span>
+  <span class="visual-index" aria-hidden="true">{config.index}</span>
+</div>

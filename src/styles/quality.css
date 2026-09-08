@@ -33,8 +33,10 @@ body {
   border-bottom-color: transparent;
 }
 
+/* Anchor offset is controlled only by html scroll-padding-top.
+   Keeping section scroll-margin as well caused a doubled sticky-header gap. */
 section[id] {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 0;
 }
 
 .error-page {
@@ -102,7 +104,7 @@ section[id] {
 
 @media (max-width: 680px) {
   section[id] {
-    scroll-margin-top: 62px;
+    scroll-margin-top: 0;
   }
 
   .error-page {

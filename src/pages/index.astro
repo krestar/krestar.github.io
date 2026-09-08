@@ -5,94 +5,125 @@ import ProjectVisual from '../components/ProjectVisual.astro';
 <BaseLayout>
   <main>
     <header class="site-nav">
-      <a class="wordmark" href="#top">KRESTAR <span>/ BACKEND ENGINEER</span></a>
-      <div class="nav-cluster">
-        <nav aria-label="Primary">
-          <a data-nav href="#work" data-en="WORK" data-ko="PROJECTS">WORK</a>
-          <a data-nav href="#education" data-en="EDUCATION" data-ko="EDUCATION">EDUCATION</a>
-          <a data-nav href="#contact" data-en="CONTACT" data-ko="CONTACT">CONTACT</a>
-        </nav>
-        <div class="site-controls" aria-label="Display options">
-          <button type="button" class="control-button" data-theme-toggle aria-label="Switch to dark mode">DARK</button>
-          <button type="button" class="control-button" data-lang-toggle aria-label="한국어로 보기">KR</button>
-        </div>
-      </div>
+      <a class="wordmark" href="#top">KRESTAR <span>/ BACKEND DEVELOPER</span></a>
+      <nav aria-label="Primary">
+        <a data-nav href="#focus">FOCUS</a>
+        <a data-nav href="#work">PROJECTS</a>
+        <a data-nav href="#education">EDUCATION</a>
+        <a data-nav href="#contact">CONTACT</a>
+      </nav>
     </header>
 
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
     <section id="top" class="hero" data-section>
-      <div class="hero-gridline" aria-hidden="true"></div>
-      <div class="hero-meta mono">2026 / KR</div>
-      <h1>
-        <span data-en="BACKEND SYSTEMS" data-ko="제품 로직,">BACKEND SYSTEMS</span>
-        <span data-en="FOR PRODUCT LOGIC," data-ko="데이터와 운영을 위한">FOR PRODUCT LOGIC,</span>
-        <span data-en="DATA, AND OPERATIONS." data-ko="백엔드 시스템.">DATA, AND OPERATIONS.</span>
-      </h1>
-      <p
-        class="hero-profile"
-        data-en="Backend-focused software engineer working across product systems, data, and AI-enabled workflows."
-        data-ko="제품 시스템, 데이터, AI 활용 워크플로 전반을 다루는 백엔드 중심 소프트웨어 엔지니어입니다."
-      >Backend-focused software engineer working across product systems, data, and AI-enabled workflows.</p>
+      <div class="hero-pointer" aria-hidden="true">
+        <span class="pointer-x"></span>
+        <span class="pointer-y"></span>
+        <span class="pointer-dot"></span>
+        <span class="pointer-readout mono" data-pointer-readout>X 000 / Y 000</span>
+      </div>
+
+      <div class="hero-meta mono">
+        <span>2026 / KR</span>
+        <span>BACKEND / AI-ENABLED</span>
+      </div>
+
+      <div class="hero-copy">
+        <p class="hero-eyebrow mono">KRESTAR / BACKEND DEVELOPER</p>
+        <h1>
+          <span data-en="BACKEND DEVELOPER" data-ko="신뢰할 수 있는">신뢰할 수 있는</span>
+          <span data-en="BUILDING RELIABLE" data-ko="제품 시스템을 만드는">제품 시스템을 만드는</span>
+          <span data-en="PRODUCT SYSTEMS." data-ko="백엔드 개발자.">백엔드 개발자.</span>
+        </h1>
+        <p
+          class="hero-profile"
+          data-en="I work on data integrity, concurrency, failure recovery, and authorization boundaries, while connecting AI to real product features safely."
+          data-ko="데이터 정합성·동시성·장애 복구·권한 경계를 다루고, AI를 실제 제품 기능에 안전하게 연결하는 방법을 고민합니다."
+        >데이터 정합성·동시성·장애 복구·권한 경계를 다루고, AI를 실제 제품 기능에 안전하게 연결하는 방법을 고민합니다.</p>
+      </div>
+
+      <div class="hero-signals mono" aria-hidden="true">
+        <span data-proximity>DATA INTEGRITY</span>
+        <span data-proximity>CONCURRENCY</span>
+        <span data-proximity>FAILURE RECOVERY</span>
+        <span data-proximity>AI IN PRODUCT</span>
+      </div>
+
       <div class="hero-footer mono">
-        <a href="#work"><span data-en="WORK / 03" data-ko="PROJECTS / 03">WORK / 03</span> <span>↓</span></a>
+        <a href="#focus"><span>ENGINEERING FOCUS</span> <span>↓</span></a>
         <a href="https://github.com/krestar" target="_blank" rel="noreferrer">GITHUB ↗</a>
       </div>
     </section>
 
-    <section id="work" class="section work" data-section>
-      <div class="section-heading">
-        <span class="mono" data-en="01 / SELECTED WORK" data-ko="01 / SELECTED PROJECTS">01 / SELECTED WORK</span>
-        <span class="mono" data-en="03 PROJECTS" data-ko="03 PROJECTS">03 PROJECTS</span>
+    <section id="focus" class="section focus" data-section>
+      <div class="section-heading" data-reveal>
+        <span class="mono">01 / ENGINEERING FOCUS</span>
+        <span class="mono">WHAT I CARE ABOUT</span>
       </div>
 
-      <article class="project project-featured" data-project="slotq">
+      <div class="focus-intro" data-reveal>
+        <h2 data-en="The problems I keep coming back to." data-ko="프로젝트가 달라도, 계속 돌아보게 되는 문제들.">프로젝트가 달라도, 계속 돌아보게 되는 문제들.</h2>
+        <p data-en="I care less about whether a feature merely works, and more about whether the system stays correct when requests overlap, failures happen, and boundaries are crossed." data-ko="기능이 한 번 동작하는 것보다, 요청이 겹치고 장애가 발생하고 경계를 넘나드는 상황에서도 시스템이 올바르게 유지되는지를 더 중요하게 봅니다.">기능이 한 번 동작하는 것보다, 요청이 겹치고 장애가 발생하고 경계를 넘나드는 상황에서도 시스템이 올바르게 유지되는지를 더 중요하게 봅니다.</p>
+      </div>
+
+      <div class="focus-list">
+        <article class="focus-item" data-focus-item data-reveal>
+          <span class="focus-index mono">01</span>
+          <div><h3>DATA INTEGRITY</h3><p data-en="Keep state consistent across concurrent requests, retries, and partial failures." data-ko="동시 요청·재시도·부분 실패가 겹쳐도 상태가 일관되게 남도록 설계합니다.">동시 요청·재시도·부분 실패가 겹쳐도 상태가 일관되게 남도록 설계합니다.</p></div>
+          <span class="focus-code mono">CONSISTENCY</span>
+        </article>
+        <article class="focus-item" data-focus-item data-reveal>
+          <span class="focus-index mono">02</span>
+          <div><h3>CONCURRENCY & STATE</h3><p data-en="Model idempotency, state transitions, and race conditions as part of the product flow." data-ko="멱등성·상태 전이·race condition을 제품 흐름의 일부로 다룹니다.">멱등성·상태 전이·race condition을 제품 흐름의 일부로 다룹니다.</p></div>
+          <span class="focus-code mono">STATE</span>
+        </article>
+        <article class="focus-item" data-focus-item data-reveal>
+          <span class="focus-index mono">03</span>
+          <div><h3>OPERATIONAL SAFETY</h3><p data-en="Design for recovery, timeouts, and authorization boundaries before they become production incidents." data-ko="장애 복구·timeout·권한 경계를 운영 사고가 되기 전에 설계에 포함합니다.">장애 복구·timeout·권한 경계를 운영 사고가 되기 전에 설계에 포함합니다.</p></div>
+          <span class="focus-code mono">RECOVERY</span>
+        </article>
+        <article class="focus-item" data-focus-item data-reveal>
+          <span class="focus-index mono">04</span>
+          <div><h3>AI IN PRODUCT</h3><p data-en="Connect LLMs and agents to real product capabilities without giving up deterministic system boundaries." data-ko="LLM과 Agent를 실제 제품 기능에 연결하되, 시스템의 결정적 경계는 놓치지 않으려 합니다.">LLM과 Agent를 실제 제품 기능에 연결하되, 시스템의 결정적 경계는 놓치지 않으려 합니다.</p></div>
+          <span class="focus-code mono">AI-ENABLED</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="work" class="section work" data-section>
+      <div class="section-heading" data-reveal><span class="mono">02 / SELECTED PROJECTS</span><span class="mono">03 PROJECTS</span></div>
+
+      <article class="project project-featured" data-project="slotq" data-reveal>
         <div class="project-copy">
-          <div class="project-kicker mono" data-en="01 / FLAGSHIP / PERSONAL" data-ko="01 / FLAGSHIP / PERSONAL">01 / FLAGSHIP / PERSONAL</div>
+          <div class="project-kicker mono">01 / PERSONAL</div>
           <h2>SLOTQ</h2>
-          <p
-            data-en="A reservation, queue, and venue operations platform built around concurrency, state transitions, and reliable backend workflows."
-            data-ko="동시성, 상태 전이, 신뢰 가능한 백엔드 워크플로를 중심으로 설계한 예약·대기열·매장 운영 플랫폼입니다."
-          >A reservation, queue, and venue operations platform built around concurrency, state transitions, and reliable backend workflows.</p>
-          <dl class="project-meta mono">
-            <div><dt data-en="ROLE" data-ko="ROLE">ROLE</dt><dd>BACKEND</dd></div>
-            <div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div>
-            <div><dt data-en="FOCUS" data-ko="FOCUS">FOCUS</dt><dd>CONSISTENCY / EVENTS / OPERATIONS</dd></div>
-          </dl>
-          <a class="project-link mono" href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">VIEW REPOSITORY ↗</a>
+          <p data-en="A real-time reservation, waitlist, and store-operations platform that deals with concurrent bookings, state transitions, data integrity, duplicate events, and failure recovery. After stabilizing the product backend, I am extending it so AI agents can safely use Product APIs." data-ko="동시 예약·상태 전이·데이터 정합성을 다루고, 이벤트 중복과 장애 복구까지 고려하는 실시간 예약·대기·매장 운영 플랫폼입니다. 제품 백엔드를 안정화한 뒤 AI Agent가 Product API를 안전하게 사용하는 구조로 확장하고 있습니다.">동시 예약·상태 전이·데이터 정합성을 다루고, 이벤트 중복과 장애 복구까지 고려하는 실시간 예약·대기·매장 운영 플랫폼입니다. 제품 백엔드를 안정화한 뒤 AI Agent가 Product API를 안전하게 사용하는 구조로 확장하고 있습니다.</p>
+          <dl class="project-meta mono"><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div><div><dt>FOCUS</dt><dd>CONSISTENCY / EVENTS / RECOVERY</dd></div></dl>
+          <a class="project-link mono" href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
         </div>
         <ProjectVisual kind="slotq" />
       </article>
 
       <div class="project-list">
-        <article class="project project-row" data-project="uctale">
+        <article class="project project-row" data-project="uctale" data-reveal>
           <div class="project-copy">
-            <div class="project-kicker mono" data-en="02 / PERSONAL" data-ko="02 / PERSONAL">02 / PERSONAL</div>
+            <div class="project-kicker mono">02 / PERSONAL</div>
             <h2>UCTALE</h2>
-            <p
-              data-en="An AI text-adventure backend where game rules and canonical state remain server-owned while models handle narrative generation."
-              data-ko="게임 규칙과 canonical state는 서버가 소유하고, 모델은 내러티브 생성을 담당하도록 경계를 설계한 AI 텍스트 어드벤처 백엔드입니다."
-            >An AI text-adventure backend where game rules and canonical state remain server-owned while models handle narrative generation.</p>
-            <dl class="project-meta mono">
-              <div><dt data-en="ROLE" data-ko="ROLE">ROLE</dt><dd>BACKEND</dd></div>
-              <div><dt data-en="FOCUS" data-ko="FOCUS">FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div>
-            </dl>
-            <a class="project-link mono" href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">VIEW REPOSITORY ↗</a>
+            <p data-en="An AI text-adventure where the server owns game state and turn integrity while LLMs generate the narrative. I am also evolving the codebase through an agent-assisted refactoring workflow to shorten iteration cycles and improve maintainability." data-ko="서버가 게임 상태와 턴 무결성을 책임지고 LLM이 이야기를 생성하는 AI 텍스트 어드벤처입니다. 최근에는 AI 코딩 에이전트를 리팩터링·검증 루프에 적극 활용해 오래된 구조를 빠르게 정리하고 반복 개발 속도를 높이고 있습니다.">서버가 게임 상태와 턴 무결성을 책임지고 LLM이 이야기를 생성하는 AI 텍스트 어드벤처입니다. 최근에는 AI 코딩 에이전트를 리팩터링·검증 루프에 적극 활용해 오래된 구조를 빠르게 정리하고 반복 개발 속도를 높이고 있습니다.</p>
+            <dl class="project-meta mono"><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / POSTGRESQL / GEMINI</dd></div><div><dt>FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div><div><dt>WORKFLOW</dt><dd>AI CODING AGENT / REFACTORING</dd></div></dl>
+            <a class="project-link mono" href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
           </div>
           <ProjectVisual kind="uctale" />
         </article>
 
-        <article class="project project-row" data-project="fowoco">
+        <article class="project project-row" data-project="fowoco" data-reveal>
           <div class="project-copy">
-            <div class="project-kicker mono" data-en="03 / COLLABORATIVE" data-ko="03 / COLLABORATIVE">03 / COLLABORATIVE</div>
+            <div class="project-kicker mono">03 / COLLABORATIVE</div>
             <h2>FOWOCO</h2>
-            <p
-              data-en="A collaborative HR workflow backend. My work focused on PostgreSQL, row-level security, settings, demo data, and database operational safety."
-              data-ko="E-9 고용 사업장을 위한 HR 워크플로 백엔드 팀 프로젝트입니다. PostgreSQL, RLS, 설정, 데모 데이터와 데이터베이스 운영 안전성을 담당했습니다."
-            >A collaborative HR workflow backend. My work focused on PostgreSQL, row-level security, settings, demo data, and database operational safety.</p>
-            <dl class="project-meta mono">
-              <div><dt data-en="ROLE" data-ko="ROLE">ROLE</dt><dd>BACKEND / DATABASE</dd></div>
-              <div><dt data-en="FOCUS" data-ko="FOCUS">FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div>
-            </dl>
-            <a class="project-link mono" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">VIEW REPOSITORY ↗</a>
+            <p data-en="A collaborative HR workflow platform for E-9 workers and employers. I focused on multi-tenant data isolation and database operational safety with PostgreSQL and RLS, including tenant context, runtime timeout protection, settings APIs, and demo-data stability." data-ko="E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 팀 프로젝트입니다. PostgreSQL과 RLS를 활용한 멀티테넌트 데이터 격리와 DB 운영 안정성을 중심으로, Tenant Context·Runtime Timeout 보호·사업장 설정 API·Demo Seed 안정화 등을 담당했습니다.">E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 팀 프로젝트입니다. PostgreSQL과 RLS를 활용한 멀티테넌트 데이터 격리와 DB 운영 안정성을 중심으로, Tenant Context·Runtime Timeout 보호·사업장 설정 API·Demo Seed 안정화 등을 담당했습니다.</p>
+            <dl class="project-meta mono"><div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div><div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div></dl>
+            <div class="project-links mono"><a class="project-link" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a><a class="project-link" href="https://github.com/fowoco/server/pulls?q=is%3Apr+is%3Amerged+author%3Akrestar" target="_blank" rel="noreferrer" data-en="MY MERGED PRS ↗" data-ko="내 MERGED PR 보기 ↗">내 MERGED PR 보기 ↗</a></div>
           </div>
           <ProjectVisual kind="fowoco" />
         </article>
@@ -100,47 +131,26 @@ import ProjectVisual from '../components/ProjectVisual.astro';
     </section>
 
     <section id="education" class="section education" data-section>
-      <div class="section-heading">
-        <span class="mono" data-en="02 / EDUCATION & PROGRAMS" data-ko="02 / EDUCATION & PROGRAMS">02 / EDUCATION & PROGRAMS</span>
-        <span class="mono">2020 — 2026</span>
-      </div>
+      <div class="section-heading" data-reveal><span class="mono">03 / EDUCATION & PROGRAMS</span><span class="mono">2020 — 2026</span></div>
       <div class="timeline">
-        <article class="timeline-item">
-          <div class="timeline-date mono">2020 — 2026</div>
-          <div><h3>B.S. IN SOFTWARE ENGINEERING</h3></div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-date mono">2025.10 — 2026.01</div>
-          <div><h3>WOOWACOURSE PRECOURSE</h3><p class="mono">BACKEND</p></div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-date mono">2026.03 — 2026.09</div>
-          <div><h3>KT AIVLE SCHOOL</h3><p class="mono">AI DEVELOPER</p></div>
-        </article>
+        <article class="timeline-item" data-reveal><div class="timeline-date mono">2020 — 2026</div><div><h3>B.S. IN SOFTWARE ENGINEERING</h3></div></article>
+        <article class="timeline-item" data-reveal><div class="timeline-date mono">2025.10 — 2026.01</div><div><h3>WOOWACOURSE PRECOURSE</h3><p class="mono">BACKEND</p></div></article>
+        <article class="timeline-item" data-reveal><div class="timeline-date mono">2026.03 — 2026.09</div><div><h3>KT AIVLE SCHOOL</h3><p class="mono">AI DEVELOPER</p></div></article>
       </div>
     </section>
 
     <section id="contact" class="section contact" data-section>
-      <div class="section-heading">
-        <span class="mono" data-en="03 / CONTACT" data-ko="03 / CONTACT">03 / CONTACT</span>
-        <span class="mono" data-en="OPEN LINKS" data-ko="OPEN LINKS">OPEN LINKS</span>
+      <div class="section-heading" data-reveal><span class="mono">04 / CONTACT</span><span class="mono">OPEN LINKS</span></div>
+      <div class="contact-grid" data-reveal>
+        <a href="https://github.com/krestar" target="_blank" rel="noreferrer"><span class="mono">GITHUB</span><strong>github.com/krestar</strong><span class="link-arrow">↗</span></a>
+        <a href="mailto:krestar.dev@gmail.com"><span class="mono">EMAIL</span><strong>krestar.dev@gmail.com</strong><span class="link-arrow">↗</span></a>
       </div>
-      <div class="contact-grid">
-        <a href="https://github.com/krestar" target="_blank" rel="noreferrer">
-          <span class="mono">GITHUB</span>
-          <strong>github.com/krestar</strong>
-          <span>↗</span>
-        </a>
-        <a href="mailto:krestar.dev@gmail.com">
-          <span class="mono">EMAIL</span>
-          <strong>krestar.dev@gmail.com</strong>
-          <span>↗</span>
-        </a>
-      </div>
-      <footer class="site-footer mono">
-        <span>KRESTAR / 2026</span>
-        <span>NO TRACKING. NO COOKIES.</span>
-      </footer>
+      <footer class="site-footer mono"><span>KRESTAR / 2026</span><span>NO TRACKING. NO COOKIES.</span></footer>
     </section>
   </main>
+
+  <div class="display-dock" aria-label="Display options">
+    <button type="button" class="display-toggle" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false"><span class="display-label">THEME</span><strong data-theme-state>LIGHT</strong><span class="display-indicator" aria-hidden="true"></span></button>
+    <button type="button" class="display-toggle" data-lang-toggle aria-label="View in English" aria-pressed="true"><span class="display-label">LANG</span><strong data-lang-state>KO</strong><span class="display-indicator" aria-hidden="true"></span></button>
+  </div>
 </BaseLayout>

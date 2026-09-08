@@ -16,7 +16,7 @@ import ProjectVisual from '../components/ProjectVisual.astro';
 
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-    <section id="top" class="hero" data-section>
+    <section id="top" class="hero" data-section data-snap>
       <div class="hero-pointer" aria-hidden="true">
         <span class="pointer-x"></span>
         <span class="pointer-y"></span>
@@ -24,39 +24,40 @@ import ProjectVisual from '../components/ProjectVisual.astro';
         <span class="pointer-readout mono" data-pointer-readout>X 000 / Y 000</span>
       </div>
 
-      <div class="hero-meta mono">
+      <div class="hero-meta mono" data-reveal>
         <span>2026 / KR</span>
         <span>BACKEND / AI-ENABLED</span>
       </div>
 
       <div class="hero-copy">
-        <p class="hero-eyebrow mono">KRESTAR / BACKEND DEVELOPER</p>
-        <h1>
+        <p class="hero-eyebrow mono" data-reveal>KRESTAR / BACKEND DEVELOPER</p>
+        <h1 data-reveal>
           <span data-en="BACKEND DEVELOPER" data-ko="신뢰할 수 있는">신뢰할 수 있는</span>
           <span data-en="BUILDING RELIABLE" data-ko="제품 시스템을 만드는">제품 시스템을 만드는</span>
           <span data-en="PRODUCT SYSTEMS." data-ko="백엔드 개발자.">백엔드 개발자.</span>
         </h1>
         <p
           class="hero-profile"
+          data-reveal
           data-en="I work on data integrity, concurrency, failure recovery, and authorization boundaries, while connecting AI to real product features safely."
           data-ko="데이터 정합성·동시성·장애 복구·권한 경계를 다루고, AI를 실제 제품 기능에 안전하게 연결하는 방법을 고민합니다."
         >데이터 정합성·동시성·장애 복구·권한 경계를 다루고, AI를 실제 제품 기능에 안전하게 연결하는 방법을 고민합니다.</p>
       </div>
 
-      <div class="hero-signals mono" aria-hidden="true">
+      <div class="hero-signals mono" aria-hidden="true" data-reveal>
         <span data-proximity>DATA INTEGRITY</span>
         <span data-proximity>CONCURRENCY</span>
         <span data-proximity>FAILURE RECOVERY</span>
         <span data-proximity>AI IN PRODUCT</span>
       </div>
 
-      <div class="hero-footer mono">
+      <div class="hero-footer mono" data-reveal>
         <a href="#focus"><span>ENGINEERING FOCUS</span> <span>↓</span></a>
         <a href="https://github.com/krestar" target="_blank" rel="noreferrer">GITHUB ↗</a>
       </div>
     </section>
 
-    <section id="focus" class="section focus" data-section>
+    <section id="focus" class="section focus" data-section data-snap>
       <div class="section-heading" data-reveal>
         <span class="mono">01 / ENGINEERING FOCUS</span>
         <span class="mono">WHAT I CARE ABOUT</span>
@@ -94,43 +95,55 @@ import ProjectVisual from '../components/ProjectVisual.astro';
     <section id="work" class="section work" data-section>
       <div class="section-heading" data-reveal><span class="mono">02 / SELECTED PROJECTS</span><span class="mono">03 PROJECTS</span></div>
 
-      <article class="project project-featured" data-project="slotq" data-reveal>
+      <article class="project project-featured" data-project="slotq" data-snap>
         <div class="project-copy">
-          <div class="project-kicker mono">01 / PERSONAL</div>
-          <h2>SLOTQ</h2>
-          <p data-en="A real-time reservation, waitlist, and store-operations platform that deals with concurrent bookings, state transitions, data integrity, duplicate events, and failure recovery. After stabilizing the product backend, I am extending it so AI agents can safely use Product APIs." data-ko="동시 예약·상태 전이·데이터 정합성을 다루고, 이벤트 중복과 장애 복구까지 고려하는 실시간 예약·대기·매장 운영 플랫폼입니다. 제품 백엔드를 안정화한 뒤 AI Agent가 Product API를 안전하게 사용하는 구조로 확장하고 있습니다.">동시 예약·상태 전이·데이터 정합성을 다루고, 이벤트 중복과 장애 복구까지 고려하는 실시간 예약·대기·매장 운영 플랫폼입니다. 제품 백엔드를 안정화한 뒤 AI Agent가 Product API를 안전하게 사용하는 구조로 확장하고 있습니다.</p>
-          <dl class="project-meta mono"><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div><div><dt>FOCUS</dt><dd>CONSISTENCY / EVENTS / RECOVERY</dd></div></dl>
-          <a class="project-link mono" href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
+          <div class="project-kicker mono" data-reveal>01 / PERSONAL</div>
+          <h2 data-reveal>SLOTQ</h2>
+          <p class="project-description">
+            <span class="sentence" data-reveal data-en="A real-time reservation, waitlist, and store-operations platform built around concurrent bookings, state transitions, data integrity, duplicate events, and failure recovery." data-ko="동시 예약·상태 전이·데이터 정합성을 다루고, 이벤트 중복과 장애 복구까지 고려하는 실시간 예약·대기·매장 운영 플랫폼입니다.">동시 예약·상태 전이·데이터 정합성을 다루고, 이벤트 중복과 장애 복구까지 고려하는 실시간 예약·대기·매장 운영 플랫폼입니다.</span>
+            <span class="sentence" data-reveal data-en="After stabilizing the product backend, I am extending it so AI agents can safely use Product APIs." data-ko="제품 백엔드를 안정화한 뒤 AI Agent가 Product API를 안전하게 사용하는 구조로 확장하고 있습니다.">제품 백엔드를 안정화한 뒤 AI Agent가 Product API를 안전하게 사용하는 구조로 확장하고 있습니다.</span>
+          </p>
+          <dl class="project-meta mono" data-reveal><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div><div><dt>FOCUS</dt><dd>CONSISTENCY / EVENTS / RECOVERY</dd></div></dl>
+          <a class="project-link mono" data-reveal href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
         </div>
-        <ProjectVisual kind="slotq" />
+        <div data-reveal><ProjectVisual kind="slotq" /></div>
       </article>
 
       <div class="project-list">
-        <article class="project project-row" data-project="uctale" data-reveal>
+        <article class="project project-row" data-project="uctale" data-snap>
           <div class="project-copy">
-            <div class="project-kicker mono">02 / PERSONAL</div>
-            <h2>UCTALE</h2>
-            <p data-en="An AI text-adventure where the server owns game state and turn integrity while LLMs generate the narrative. I am also evolving the codebase through an agent-assisted refactoring workflow to shorten iteration cycles and improve maintainability." data-ko="서버가 게임 상태와 턴 무결성을 책임지고 LLM이 이야기를 생성하는 AI 텍스트 어드벤처입니다. 최근에는 AI 코딩 에이전트를 리팩터링·검증 루프에 적극 활용해 오래된 구조를 빠르게 정리하고 반복 개발 속도를 높이고 있습니다.">서버가 게임 상태와 턴 무결성을 책임지고 LLM이 이야기를 생성하는 AI 텍스트 어드벤처입니다. 최근에는 AI 코딩 에이전트를 리팩터링·검증 루프에 적극 활용해 오래된 구조를 빠르게 정리하고 반복 개발 속도를 높이고 있습니다.</p>
-            <dl class="project-meta mono"><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / POSTGRESQL / GEMINI</dd></div><div><dt>FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div><div><dt>WORKFLOW</dt><dd>AI CODING AGENT / REFACTORING</dd></div></dl>
-            <a class="project-link mono" href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
+            <div class="project-kicker mono" data-reveal>02 / PERSONAL</div>
+            <h2 data-reveal>UCTALE</h2>
+            <p class="project-description">
+              <span class="sentence" data-reveal data-en="An AI text-adventure where the server owns game state and turn integrity while LLMs generate the narrative." data-ko="서버가 게임 상태와 턴 무결성을 책임지고 LLM이 이야기를 생성하는 AI 텍스트 어드벤처입니다.">서버가 게임 상태와 턴 무결성을 책임지고 LLM이 이야기를 생성하는 AI 텍스트 어드벤처입니다.</span>
+              <span class="sentence" data-reveal data-en="I am also evolving the codebase through an agent-assisted refactoring workflow to shorten iteration cycles and improve maintainability." data-ko="최근에는 AI 코딩 에이전트를 리팩터링·검증 루프에 적극 활용해 오래된 구조를 빠르게 정리하고 반복 개발 속도를 높이고 있습니다.">최근에는 AI 코딩 에이전트를 리팩터링·검증 루프에 적극 활용해 오래된 구조를 빠르게 정리하고 반복 개발 속도를 높이고 있습니다.</span>
+            </p>
+            <dl class="project-meta mono" data-reveal><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / POSTGRESQL / GEMINI</dd></div><div><dt>FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div><div><dt>WORKFLOW</dt><dd>AI CODING AGENT / REFACTORING</dd></div></dl>
+            <a class="project-link mono" data-reveal href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
           </div>
-          <ProjectVisual kind="uctale" />
+          <div data-reveal><ProjectVisual kind="uctale" /></div>
         </article>
 
-        <article class="project project-row" data-project="fowoco" data-reveal>
+        <article class="project project-row" data-project="fowoco" data-snap>
           <div class="project-copy">
-            <div class="project-kicker mono">03 / COLLABORATIVE</div>
-            <h2>FOWOCO</h2>
-            <p data-en="A collaborative HR workflow platform for E-9 workers and employers. I focused on multi-tenant data isolation and database operational safety with PostgreSQL and RLS, including tenant context, runtime timeout protection, settings APIs, and demo-data stability." data-ko="E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 팀 프로젝트입니다. PostgreSQL과 RLS를 활용한 멀티테넌트 데이터 격리와 DB 운영 안정성을 중심으로, Tenant Context·Runtime Timeout 보호·사업장 설정 API·Demo Seed 안정화 등을 담당했습니다.">E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 팀 프로젝트입니다. PostgreSQL과 RLS를 활용한 멀티테넌트 데이터 격리와 DB 운영 안정성을 중심으로, Tenant Context·Runtime Timeout 보호·사업장 설정 API·Demo Seed 안정화 등을 담당했습니다.</p>
-            <dl class="project-meta mono"><div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div><div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div></dl>
-            <div class="project-links mono"><a class="project-link" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a><a class="project-link" href="https://github.com/fowoco/server/pulls?q=is%3Apr+is%3Amerged+author%3Akrestar" target="_blank" rel="noreferrer" data-en="MY MERGED PRS ↗" data-ko="내 MERGED PR 보기 ↗">내 MERGED PR 보기 ↗</a></div>
+            <div class="project-kicker mono" data-reveal>03 / COLLABORATIVE</div>
+            <h2 data-reveal>FOWOCO</h2>
+            <p class="project-description">
+              <span class="sentence" data-reveal data-en="A collaborative HR workflow platform for E-9 workers and employers." data-ko="E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 팀 프로젝트입니다.">E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 팀 프로젝트입니다.</span>
+              <span class="sentence" data-reveal data-en="I focused on multi-tenant data isolation and database operational safety with PostgreSQL and RLS, including tenant context, runtime timeout protection, settings APIs, and demo-data stability." data-ko="PostgreSQL과 RLS를 활용한 멀티테넌트 데이터 격리와 DB 운영 안정성을 중심으로, Tenant Context·Runtime Timeout 보호·사업장 설정 API·Demo Seed 안정화 등을 담당했습니다.">PostgreSQL과 RLS를 활용한 멀티테넌트 데이터 격리와 DB 운영 안정성을 중심으로, Tenant Context·Runtime Timeout 보호·사업장 설정 API·Demo Seed 안정화 등을 담당했습니다.</span>
+            </p>
+            <dl class="project-meta mono" data-reveal><div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div><div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div></dl>
+            <div class="project-links mono" data-reveal>
+              <a class="project-link" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
+              <a class="project-link" href="https://github.com/fowoco/server/pulls?q=is%3Apr+is%3Amerged+author%3Akrestar" target="_blank" rel="noreferrer" data-en="MERGED PRS ↗" data-ko="머지한 PR ↗">머지한 PR ↗</a>
+            </div>
           </div>
-          <ProjectVisual kind="fowoco" />
+          <div data-reveal><ProjectVisual kind="fowoco" /></div>
         </article>
       </div>
     </section>
 
-    <section id="education" class="section education" data-section>
+    <section id="education" class="section education" data-section data-snap>
       <div class="section-heading" data-reveal><span class="mono">03 / EDUCATION & PROGRAMS</span><span class="mono">2020 — 2026</span></div>
       <div class="timeline">
         <article class="timeline-item" data-reveal><div class="timeline-date mono">2020 — 2026</div><div><h3>B.S. IN SOFTWARE ENGINEERING</h3></div></article>
@@ -139,13 +152,13 @@ import ProjectVisual from '../components/ProjectVisual.astro';
       </div>
     </section>
 
-    <section id="contact" class="section contact" data-section>
+    <section id="contact" class="section contact" data-section data-snap>
       <div class="section-heading" data-reveal><span class="mono">04 / CONTACT</span><span class="mono">OPEN LINKS</span></div>
       <div class="contact-grid" data-reveal>
         <a href="https://github.com/krestar" target="_blank" rel="noreferrer"><span class="mono">GITHUB</span><strong>github.com/krestar</strong><span class="link-arrow">↗</span></a>
         <a href="mailto:krestar.dev@gmail.com"><span class="mono">EMAIL</span><strong>krestar.dev@gmail.com</strong><span class="link-arrow">↗</span></a>
       </div>
-      <footer class="site-footer mono"><span>KRESTAR / 2026</span><span>NO TRACKING. NO COOKIES.</span></footer>
+      <footer class="site-footer mono" data-reveal><span>KRESTAR / 2026</span><span>NO TRACKING. NO COOKIES.</span></footer>
     </section>
   </main>
 

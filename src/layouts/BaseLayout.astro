@@ -1,17 +1,18 @@
 ---
 import '../styles/global.css';
 import '../styles/quality.css';
+import '../styles/interactive.css';
 
 const {
-  title = 'Krestar / Backend Engineer',
-  description = 'Backend-focused software engineer working across product systems, data, and AI-enabled workflows.',
+  title = 'Krestar / 백엔드 개발자',
+  description = '데이터 정합성, 동시성, 장애 복구와 권한 경계를 다루고 AI를 실제 제품 기능에 안전하게 연결하는 백엔드 개발자입니다.',
   robots = 'index, follow'
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://krestar.github.io/').toString();
 ---
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,7 +27,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://krestar.git
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -40,137 +41,194 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://krestar.git
           const theme = localStorage.getItem('krestar-theme');
           const language = localStorage.getItem('krestar-language');
           if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
-          if (language === 'ko') document.documentElement.lang = 'ko';
+          if (language === 'en') document.documentElement.lang = 'en';
         } catch {}
       })();
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#top" data-en="Skip to content" data-ko="본문으로 이동">Skip to content</a>
+    <a class="skip-link" href="#top" data-en="Skip to content" data-ko="본문으로 이동">본문으로 이동</a>
     <slot />
 
     <script is:inline>
       const root = document.documentElement;
       const themeMeta = document.querySelector('meta[name="theme-color"]');
       const descriptionMeta = document.querySelector('meta[name="description"]');
+      const ogLocale = document.querySelector('meta[property="og:locale"]');
       const themeButton = document.querySelector('[data-theme-toggle]');
       const languageButton = document.querySelector('[data-lang-toggle]');
+      const themeState = document.querySelector('[data-theme-state]');
+      const languageState = document.querySelector('[data-lang-state]');
       const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+      const updateScrollProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = max > 0 ? window.scrollY / max : 0;
+        root.style.setProperty('--scroll-progress', `${clamp(progress, 0, 1) * 100}%`);
+        document.querySelector('.site-nav')?.classList.toggle('is-scrolled', window.scrollY > 12);
+      };
+
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          updateScrollProgress();
+          scrollTicking = false;
+        });
+      }, { passive: true });
+      updateScrollProgress();
 
       if (finePointer && !reducedMotion) {
-        window.addEventListener('pointermove', (event) => {
-          root.style.setProperty('--pointer-x', `${event.clientX}px`);
-          root.style.setProperty('--pointer-y', `${event.clientY}px`);
+        const hero = document.querySelector('.hero');
+        const heroReadout = document.querySelector('[data-pointer-readout]');
+        const proximityTargets = [...document.querySelectorAll('[data-proximity]')];
+
+        hero?.addEventListener('pointermove', (event) => {
+          const rect = hero.getBoundingClientRect();
+          const x = clamp(event.clientX - rect.left, 0, rect.width);
+          const y = clamp(event.clientY - rect.top, 0, rect.height);
+          hero.style.setProperty('--hero-pointer-x', `${x}px`);
+          hero.style.setProperty('--hero-pointer-y', `${y}px`);
+          hero.classList.add('has-pointer');
+
+          if (heroReadout) heroReadout.textContent = `X ${String(Math.round(x)).padStart(3, '0')} / Y ${String(Math.round(y)).padStart(3, '0')}`;
+
+          proximityTargets.forEach((target) => {
+            const targetRect = target.getBoundingClientRect();
+            const distance = Math.hypot(event.clientX - (targetRect.left + targetRect.width / 2), event.clientY - (targetRect.top + targetRect.height / 2));
+            target.classList.toggle('is-near', distance < 190);
+          });
         }, { passive: true });
+
+        hero?.addEventListener('pointerleave', () => {
+          hero.classList.remove('has-pointer');
+          proximityTargets.forEach((target) => target.classList.remove('is-near'));
+        }, { passive: true });
+
+        document.querySelectorAll('[data-focus-item]').forEach((item) => {
+          item.addEventListener('pointermove', (event) => {
+            const rect = item.getBoundingClientRect();
+            item.style.setProperty('--focus-x', `${clamp((event.clientX - rect.left) / rect.width, 0, 1) * 100}%`);
+            item.style.setProperty('--focus-y', `${clamp((event.clientY - rect.top) / rect.height, 0, 1) * 100}%`);
+          }, { passive: true });
+        });
 
         document.querySelectorAll('.system-visual').forEach((visual) => {
           const nodes = [...visual.querySelectorAll('.node')];
-          const clearNearby = () => nodes.forEach((node) => node.classList.remove('is-near'));
+          const readout = visual.querySelector('[data-diagram-readout]');
+          const clearNearby = () => {
+            nodes.forEach((node) => node.classList.remove('is-near'));
+            visual.classList.remove('has-pointer');
+          };
 
           visual.addEventListener('pointermove', (event) => {
-            let nearest = null;
-            let nearestDistance = 170;
+            const visualRect = visual.getBoundingClientRect();
+            const localX = clamp(event.clientX - visualRect.left, 0, visualRect.width);
+            const localY = clamp(event.clientY - visualRect.top, 0, visualRect.height);
+            visual.style.setProperty('--local-x', `${localX}px`);
+            visual.style.setProperty('--local-y', `${localY}px`);
+            visual.classList.add('has-pointer');
 
+            let nearest = null;
+            let nearestDistance = 180;
             nodes.forEach((node) => {
               const rect = node.getBoundingClientRect();
-              const centerX = rect.left + rect.width / 2;
-              const centerY = rect.top + rect.height / 2;
-              const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+              const distance = Math.hypot(event.clientX - (rect.left + rect.width / 2), event.clientY - (rect.top + rect.height / 2));
               if (distance < nearestDistance) {
                 nearest = node;
                 nearestDistance = distance;
               }
             });
-
             nodes.forEach((node) => node.classList.toggle('is-near', node === nearest));
+            if (readout) readout.textContent = nearest ? `ACTIVE / ${nearest.textContent?.trim() ?? 'NODE'}` : 'TRACE / IDLE';
           }, { passive: true });
-
           visual.addEventListener('pointerleave', clearNearby, { passive: true });
         });
+      }
+
+      const revealTargets = [...document.querySelectorAll('[data-reveal]')];
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.12 });
+        revealTargets.forEach((target) => revealObserver.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('is-visible'));
       }
 
       const sections = [...document.querySelectorAll('[data-section]')];
       const navLinks = [...document.querySelectorAll('[data-nav]')];
       if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            navLinks.forEach((link) => {
-              const active = link.getAttribute('href') === `#${entry.target.id}`;
-              link.classList.toggle('is-active', active);
-              if (active) link.setAttribute('aria-current', 'location');
-              else link.removeAttribute('aria-current');
-            });
+        const sectionObserver = new IntersectionObserver((entries) => {
+          const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+          navLinks.forEach((link) => {
+            const active = link.getAttribute('href') === `#${visible.target.id}`;
+            link.classList.toggle('is-active', active);
+            if (active) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
           });
-        }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
-        sections.forEach((section) => observer.observe(section));
+        }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.01, 0.2, 0.5] });
+        sections.forEach((section) => sectionObserver.observe(section));
       }
 
       const applyTheme = (theme, persist = true) => {
         const dark = theme === 'dark';
         if (dark) root.dataset.theme = 'dark';
         else delete root.dataset.theme;
-
+        if (themeState) themeState.textContent = dark ? 'DARK' : 'LIGHT';
         if (themeButton) {
-          themeButton.textContent = dark ? 'LIGHT' : 'DARK';
-          themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+          themeButton.setAttribute('aria-label', dark ? '라이트 모드로 전환' : '다크 모드로 전환');
           themeButton.setAttribute('aria-pressed', String(dark));
         }
         if (themeMeta) themeMeta.setAttribute('content', dark ? '#0f1115' : '#f3f2ed');
-
         if (persist) {
           try { localStorage.setItem('krestar-theme', dark ? 'dark' : 'light'); } catch {}
         }
       };
 
       const applyLanguage = (language, persist = true) => {
-        const next = language === 'ko' ? 'ko' : 'en';
+        const next = language === 'en' ? 'en' : 'ko';
         root.lang = next;
-
         document.querySelectorAll('[data-en][data-ko]').forEach((element) => {
           const value = element.dataset[next];
           if (typeof value === 'string') element.textContent = value;
         });
-
+        if (languageState) languageState.textContent = next === 'ko' ? 'KO' : 'EN';
         if (languageButton) {
-          languageButton.textContent = next === 'ko' ? 'EN' : 'KR';
           languageButton.setAttribute('aria-label', next === 'ko' ? 'View in English' : '한국어로 보기');
           languageButton.setAttribute('aria-pressed', String(next === 'ko'));
         }
-
-        const homePage = Boolean(document.querySelector('[data-section]'));
-        if (homePage) {
-          document.title = next === 'ko' ? 'Krestar / 백엔드 엔지니어' : 'Krestar / Backend Engineer';
-          if (descriptionMeta) {
-            descriptionMeta.setAttribute('content', next === 'ko'
-              ? '제품 시스템, 데이터, AI 활용 워크플로 전반을 다루는 백엔드 중심 소프트웨어 엔지니어입니다.'
-              : 'Backend-focused software engineer working across product systems, data, and AI-enabled workflows.');
-          }
+        if (document.querySelector('[data-section]')) {
+          document.title = next === 'ko' ? 'Krestar / 백엔드 개발자' : 'Krestar / Backend Developer';
+          if (descriptionMeta) descriptionMeta.setAttribute('content', next === 'ko'
+            ? '데이터 정합성, 동시성, 장애 복구와 권한 경계를 다루고 AI를 실제 제품 기능에 안전하게 연결하는 백엔드 개발자입니다.'
+            : 'Backend developer focused on data integrity, concurrency, failure recovery, authorization boundaries, and safe AI integration.');
+          if (ogLocale) ogLocale.setAttribute('content', next === 'ko' ? 'ko_KR' : 'en_US');
         }
-
         if (persist) {
           try { localStorage.setItem('krestar-language', next); } catch {}
         }
       };
 
       let savedTheme = 'light';
-      let savedLanguage = root.lang === 'ko' ? 'ko' : 'en';
+      let savedLanguage = root.lang === 'en' ? 'en' : 'ko';
       try {
         savedTheme = localStorage.getItem('krestar-theme') === 'dark' ? 'dark' : 'light';
-        savedLanguage = localStorage.getItem('krestar-language') === 'ko' ? 'ko' : 'en';
+        savedLanguage = localStorage.getItem('krestar-language') === 'en' ? 'en' : 'ko';
       } catch {}
 
       applyTheme(savedTheme, false);
       applyLanguage(savedLanguage, false);
-
-      themeButton?.addEventListener('click', () => {
-        applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
-      });
-
-      languageButton?.addEventListener('click', () => {
-        applyLanguage(root.lang === 'ko' ? 'en' : 'ko');
-      });
+      themeButton?.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+      languageButton?.addEventListener('click', () => applyLanguage(root.lang === 'ko' ? 'en' : 'ko'));
     </script>
   </body>
 </html>

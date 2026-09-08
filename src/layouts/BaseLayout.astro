@@ -1,23 +1,39 @@
 ---
 import '../styles/global.css';
+import '../styles/quality.css';
+
 const {
   title = 'Krestar / Backend Engineer',
-  description = 'Backend-focused software engineer working across product systems, data, and AI-enabled workflows.'
+  description = 'Backend-focused software engineer working across product systems, data, and AI-enabled workflows.',
+  robots = 'index, follow'
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://krestar.github.io/').toString();
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta name="theme-color" content="#f3f2ed" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content="Krestar" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://krestar.github.io/" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
     <script is:inline>
       (() => {
         try {
@@ -30,66 +46,76 @@ const {
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#top" data-en="Skip to content" data-ko="본문으로 이동">Skip to content</a>
     <slot />
+
     <script is:inline>
       const root = document.documentElement;
       const themeMeta = document.querySelector('meta[name="theme-color"]');
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+      const themeButton = document.querySelector('[data-theme-toggle]');
+      const languageButton = document.querySelector('[data-lang-toggle]');
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const updatePointer = (event) => {
-        root.style.setProperty('--pointer-x', `${event.clientX}px`);
-        root.style.setProperty('--pointer-y', `${event.clientY}px`);
-      };
-      window.addEventListener('pointermove', updatePointer, { passive: true });
-
-      document.querySelectorAll('.system-visual').forEach((visual) => {
-        const nodes = [...visual.querySelectorAll('.node')];
-        const clearNearby = () => nodes.forEach((node) => node.classList.remove('is-near'));
-
-        visual.addEventListener('pointermove', (event) => {
-          let nearest = null;
-          let nearestDistance = 170;
-
-          nodes.forEach((node) => {
-            const rect = node.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
-            if (distance < nearestDistance) {
-              nearest = node;
-              nearestDistance = distance;
-            }
-          });
-
-          nodes.forEach((node) => node.classList.toggle('is-near', node === nearest));
+      if (finePointer && !reducedMotion) {
+        window.addEventListener('pointermove', (event) => {
+          root.style.setProperty('--pointer-x', `${event.clientX}px`);
+          root.style.setProperty('--pointer-y', `${event.clientY}px`);
         }, { passive: true });
 
-        visual.addEventListener('pointerleave', clearNearby, { passive: true });
-      });
+        document.querySelectorAll('.system-visual').forEach((visual) => {
+          const nodes = [...visual.querySelectorAll('.node')];
+          const clearNearby = () => nodes.forEach((node) => node.classList.remove('is-near'));
+
+          visual.addEventListener('pointermove', (event) => {
+            let nearest = null;
+            let nearestDistance = 170;
+
+            nodes.forEach((node) => {
+              const rect = node.getBoundingClientRect();
+              const centerX = rect.left + rect.width / 2;
+              const centerY = rect.top + rect.height / 2;
+              const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+              if (distance < nearestDistance) {
+                nearest = node;
+                nearestDistance = distance;
+              }
+            });
+
+            nodes.forEach((node) => node.classList.toggle('is-near', node === nearest));
+          }, { passive: true });
+
+          visual.addEventListener('pointerleave', clearNearby, { passive: true });
+        });
+      }
 
       const sections = [...document.querySelectorAll('[data-section]')];
       const navLinks = [...document.querySelectorAll('[data-nav]')];
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          navLinks.forEach((link) => {
-            link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`);
+      if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((link) => {
+              const active = link.getAttribute('href') === `#${entry.target.id}`;
+              link.classList.toggle('is-active', active);
+              if (active) link.setAttribute('aria-current', 'location');
+              else link.removeAttribute('aria-current');
+            });
           });
-        });
-      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
-      sections.forEach((section) => observer.observe(section));
-
-      const themeButton = document.querySelector('[data-theme-toggle]');
-      const languageButton = document.querySelector('[data-lang-toggle]');
+        }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
+        sections.forEach((section) => observer.observe(section));
+      }
 
       const applyTheme = (theme, persist = true) => {
         const dark = theme === 'dark';
-        root.toggleAttribute('data-theme', dark);
         if (dark) root.dataset.theme = 'dark';
         else delete root.dataset.theme;
 
         if (themeButton) {
           themeButton.textContent = dark ? 'LIGHT' : 'DARK';
           themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+          themeButton.setAttribute('aria-pressed', String(dark));
         }
         if (themeMeta) themeMeta.setAttribute('content', dark ? '#0f1115' : '#f3f2ed');
 
@@ -110,6 +136,17 @@ const {
         if (languageButton) {
           languageButton.textContent = next === 'ko' ? 'EN' : 'KR';
           languageButton.setAttribute('aria-label', next === 'ko' ? 'View in English' : '한국어로 보기');
+          languageButton.setAttribute('aria-pressed', String(next === 'ko'));
+        }
+
+        const homePage = Boolean(document.querySelector('[data-section]'));
+        if (homePage) {
+          document.title = next === 'ko' ? 'Krestar / 백엔드 엔지니어' : 'Krestar / Backend Engineer';
+          if (descriptionMeta) {
+            descriptionMeta.setAttribute('content', next === 'ko'
+              ? '제품 시스템, 데이터, AI 활용 워크플로 전반을 다루는 백엔드 중심 소프트웨어 엔지니어입니다.'
+              : 'Backend-focused software engineer working across product systems, data, and AI-enabled workflows.');
+          }
         }
 
         if (persist) {

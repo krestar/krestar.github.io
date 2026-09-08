@@ -1,0 +1,127 @@
+html,
+body {
+  overflow-x: clip;
+}
+
+.skip-link {
+  position: fixed;
+  top: .75rem;
+  left: .75rem;
+  z-index: 100;
+  padding: .65rem .85rem;
+  border: 1px solid var(--blue);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: .72rem;
+  transform: translateY(-180%);
+  transition: transform .16s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:where(a, button):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.control-button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+  border-bottom-color: transparent;
+}
+
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+.error-page {
+  min-height: calc(100svh - 58px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(2.5rem, 6vw, 5rem) 4vw 2rem;
+}
+
+.error-index {
+  color: var(--blue);
+}
+
+.error-copy {
+  align-self: center;
+}
+
+.error-copy h1 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(4.5rem, 12vw, 12rem);
+  line-height: .86;
+  letter-spacing: -.07em;
+  font-weight: 640;
+}
+
+.error-copy p {
+  max-width: 34rem;
+  margin: 2rem 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  line-height: 1.55;
+}
+
+.error-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.error-footer a {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: .25rem;
+}
+
+.error-footer a:hover,
+.error-footer a:focus-visible {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero::after {
+    display: none;
+  }
+
+  .system-visual:hover .path,
+  .system-visual.muted:hover .path {
+    background: var(--line-strong);
+  }
+}
+
+@media (max-width: 680px) {
+  section[id] {
+    scroll-margin-top: 62px;
+  }
+
+  .error-page {
+    min-height: calc(100svh - 52px);
+    padding: 2rem 1rem 1rem;
+  }
+
+  .error-copy h1 {
+    font-size: clamp(4rem, 21vw, 7rem);
+  }
+
+  .error-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}

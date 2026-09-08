@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="404 / Krestar"
+  description="The requested page could not be found."
+  robots="noindex, nofollow"
+>
+  <header class="site-nav">
+    <a class="wordmark" href="/">KRESTAR <span>/ BACKEND ENGINEER</span></a>
+    <a class="mono" href="/" data-en="HOME ↗" data-ko="HOME ↗">HOME ↗</a>
+  </header>
+
+  <main id="top" class="error-page">
+    <div class="error-index mono">404 / NOT FOUND</div>
+    <div class="error-copy">
+      <h1 data-en="WRONG PATH." data-ko="없는 경로입니다.">WRONG PATH.</h1>
+      <p
+        data-en="This route does not exist. Return to the portfolio and continue from there."
+        data-ko="요청한 페이지가 없습니다. 포트폴리오 메인으로 돌아가 계속 확인할 수 있습니다."
+      >This route does not exist. Return to the portfolio and continue from there.</p>
+    </div>
+    <div class="error-footer mono">
+      <span>KRESTAR / 2026</span>
+      <a href="/" data-en="RETURN HOME ↗" data-ko="메인으로 돌아가기 ↗">RETURN HOME ↗</a>
+    </div>
+  </main>
+</BaseLayout>

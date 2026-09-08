@@ -2,38 +2,38 @@
 const { kind = 'slotq' } = Astro.props;
 ---
 {kind === 'slotq' && (
-  <div class="system-visual" aria-label="SlotQ system concept">
+  <div class="system-visual" role="img" aria-label="SlotQ system concept: reservation, queue, operations, and data">
     <span class="node node-a">RESERVATION</span>
     <span class="node node-b">QUEUE</span>
     <span class="node node-c">OPERATIONS</span>
     <span class="node node-d">DATA</span>
-    <span class="path path-ab"></span>
-    <span class="path path-ac"></span>
-    <span class="path path-cd"></span>
-    <span class="visual-index">01 / SYSTEM FLOW</span>
+    <span class="path path-ab" aria-hidden="true"></span>
+    <span class="path path-ac" aria-hidden="true"></span>
+    <span class="path path-cd" aria-hidden="true"></span>
+    <span class="visual-index" aria-hidden="true">01 / SYSTEM FLOW</span>
   </div>
 )}
 {kind === 'uctale' && (
-  <div class="system-visual compact" aria-label="UCTale system concept">
+  <div class="system-visual compact" role="img" aria-label="UCTale system concept: action, rules, state, and narrative">
     <span class="node node-a">ACTION</span>
     <span class="node node-b">RULES</span>
     <span class="node node-c">STATE</span>
     <span class="node node-d">NARRATIVE</span>
-    <span class="path path-ab"></span>
-    <span class="path path-ac"></span>
-    <span class="path path-cd"></span>
-    <span class="visual-index">02 / SERVER-OWNED STATE</span>
+    <span class="path path-ab" aria-hidden="true"></span>
+    <span class="path path-ac" aria-hidden="true"></span>
+    <span class="path path-cd" aria-hidden="true"></span>
+    <span class="visual-index" aria-hidden="true">02 / SERVER-OWNED STATE</span>
   </div>
 )}
 {kind === 'fowoco' && (
-  <div class="system-visual compact muted" aria-label="FOWOCO system concept">
+  <div class="system-visual compact muted" role="img" aria-label="FOWOCO data boundary concept: PostgreSQL, row-level security, tenant, and safety">
     <span class="node node-a">POSTGRESQL</span>
     <span class="node node-b">RLS</span>
     <span class="node node-c">TENANT</span>
     <span class="node node-d">SAFETY</span>
-    <span class="path path-ab"></span>
-    <span class="path path-ac"></span>
-    <span class="path path-cd"></span>
-    <span class="visual-index">03 / DATA BOUNDARY</span>
+    <span class="path path-ab" aria-hidden="true"></span>
+    <span class="path path-ac" aria-hidden="true"></span>
+    <span class="path path-cd" aria-hidden="true"></span>
+    <span class="visual-index" aria-hidden="true">03 / DATA BOUNDARY</span>
   </div>
 )}

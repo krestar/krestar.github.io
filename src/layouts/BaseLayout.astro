@@ -18,16 +18,53 @@ const {
     <meta property="og:url" content="https://krestar.github.io/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const theme = localStorage.getItem('krestar-theme');
+          const language = localStorage.getItem('krestar-language');
+          if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
+          if (language === 'ko') document.documentElement.lang = 'ko';
+        } catch {}
+      })();
+    </script>
   </head>
   <body>
     <slot />
     <script is:inline>
       const root = document.documentElement;
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+
       const updatePointer = (event) => {
         root.style.setProperty('--pointer-x', `${event.clientX}px`);
         root.style.setProperty('--pointer-y', `${event.clientY}px`);
       };
       window.addEventListener('pointermove', updatePointer, { passive: true });
+
+      document.querySelectorAll('.system-visual').forEach((visual) => {
+        const nodes = [...visual.querySelectorAll('.node')];
+        const clearNearby = () => nodes.forEach((node) => node.classList.remove('is-near'));
+
+        visual.addEventListener('pointermove', (event) => {
+          let nearest = null;
+          let nearestDistance = 170;
+
+          nodes.forEach((node) => {
+            const rect = node.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+            if (distance < nearestDistance) {
+              nearest = node;
+              nearestDistance = distance;
+            }
+          });
+
+          nodes.forEach((node) => node.classList.toggle('is-near', node === nearest));
+        }, { passive: true });
+
+        visual.addEventListener('pointerleave', clearNearby, { passive: true });
+      });
 
       const sections = [...document.querySelectorAll('[data-section]')];
       const navLinks = [...document.querySelectorAll('[data-nav]')];
@@ -40,6 +77,63 @@ const {
         });
       }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
       sections.forEach((section) => observer.observe(section));
+
+      const themeButton = document.querySelector('[data-theme-toggle]');
+      const languageButton = document.querySelector('[data-lang-toggle]');
+
+      const applyTheme = (theme, persist = true) => {
+        const dark = theme === 'dark';
+        root.toggleAttribute('data-theme', dark);
+        if (dark) root.dataset.theme = 'dark';
+        else delete root.dataset.theme;
+
+        if (themeButton) {
+          themeButton.textContent = dark ? 'LIGHT' : 'DARK';
+          themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        if (themeMeta) themeMeta.setAttribute('content', dark ? '#0f1115' : '#f3f2ed');
+
+        if (persist) {
+          try { localStorage.setItem('krestar-theme', dark ? 'dark' : 'light'); } catch {}
+        }
+      };
+
+      const applyLanguage = (language, persist = true) => {
+        const next = language === 'ko' ? 'ko' : 'en';
+        root.lang = next;
+
+        document.querySelectorAll('[data-en][data-ko]').forEach((element) => {
+          const value = element.dataset[next];
+          if (typeof value === 'string') element.textContent = value;
+        });
+
+        if (languageButton) {
+          languageButton.textContent = next === 'ko' ? 'EN' : 'KR';
+          languageButton.setAttribute('aria-label', next === 'ko' ? 'View in English' : '한국어로 보기');
+        }
+
+        if (persist) {
+          try { localStorage.setItem('krestar-language', next); } catch {}
+        }
+      };
+
+      let savedTheme = 'light';
+      let savedLanguage = root.lang === 'ko' ? 'ko' : 'en';
+      try {
+        savedTheme = localStorage.getItem('krestar-theme') === 'dark' ? 'dark' : 'light';
+        savedLanguage = localStorage.getItem('krestar-language') === 'ko' ? 'ko' : 'en';
+      } catch {}
+
+      applyTheme(savedTheme, false);
+      applyLanguage(savedLanguage, false);
+
+      themeButton?.addEventListener('click', () => {
+        applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+      });
+
+      languageButton?.addEventListener('click', () => {
+        applyLanguage(root.lang === 'ko' ? 'en' : 'ko');
+      });
     </script>
   </body>
 </html>

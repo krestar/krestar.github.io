@@ -6,41 +6,58 @@ import ProjectVisual from '../components/ProjectVisual.astro';
   <main>
     <header class="site-nav">
       <a class="wordmark" href="#top">KRESTAR <span>/ BACKEND ENGINEER</span></a>
-      <nav aria-label="Primary">
-        <a data-nav href="#work">WORK</a>
-        <a data-nav href="#education">EDUCATION</a>
-        <a data-nav href="#contact">CONTACT</a>
-      </nav>
+      <div class="nav-cluster">
+        <nav aria-label="Primary">
+          <a data-nav href="#work" data-en="WORK" data-ko="PROJECTS">WORK</a>
+          <a data-nav href="#education" data-en="EDUCATION" data-ko="EDUCATION">EDUCATION</a>
+          <a data-nav href="#contact" data-en="CONTACT" data-ko="CONTACT">CONTACT</a>
+        </nav>
+        <div class="site-controls" aria-label="Display options">
+          <button type="button" class="control-button" data-theme-toggle aria-label="Switch to dark mode">DARK</button>
+          <button type="button" class="control-button" data-lang-toggle aria-label="한국어로 보기">KR</button>
+        </div>
+      </div>
     </header>
 
     <section id="top" class="hero" data-section>
       <div class="hero-gridline" aria-hidden="true"></div>
       <div class="hero-meta mono">2026 / KR</div>
-      <h1>BACKEND SYSTEMS<br />FOR PRODUCT LOGIC,<br />DATA, AND OPERATIONS.</h1>
-      <p class="hero-profile">Backend-focused software engineer working across<br class="desktop-break" /> product systems, data, and AI-enabled workflows.</p>
+      <h1>
+        <span data-en="BACKEND SYSTEMS" data-ko="제품 로직,">BACKEND SYSTEMS</span>
+        <span data-en="FOR PRODUCT LOGIC," data-ko="데이터와 운영을 위한">FOR PRODUCT LOGIC,</span>
+        <span data-en="DATA, AND OPERATIONS." data-ko="백엔드 시스템.">DATA, AND OPERATIONS.</span>
+      </h1>
+      <p
+        class="hero-profile"
+        data-en="Backend-focused software engineer working across product systems, data, and AI-enabled workflows."
+        data-ko="제품 시스템, 데이터, AI 활용 워크플로 전반을 다루는 백엔드 중심 소프트웨어 엔지니어입니다."
+      >Backend-focused software engineer working across product systems, data, and AI-enabled workflows.</p>
       <div class="hero-footer mono">
-        <a href="#work">WORK / 03 <span>↓</span></a>
+        <a href="#work"><span data-en="WORK / 03" data-ko="PROJECTS / 03">WORK / 03</span> <span>↓</span></a>
         <a href="https://github.com/krestar" target="_blank" rel="noreferrer">GITHUB ↗</a>
       </div>
     </section>
 
     <section id="work" class="section work" data-section>
       <div class="section-heading">
-        <span class="mono">01 / SELECTED WORK</span>
-        <span class="mono">03 PROJECTS</span>
+        <span class="mono" data-en="01 / SELECTED WORK" data-ko="01 / SELECTED PROJECTS">01 / SELECTED WORK</span>
+        <span class="mono" data-en="03 PROJECTS" data-ko="03 PROJECTS">03 PROJECTS</span>
       </div>
 
       <article class="project project-featured" data-project="slotq">
         <div class="project-copy">
-          <div class="project-kicker mono">01 / FLAGSHIP / PERSONAL</div>
+          <div class="project-kicker mono" data-en="01 / FLAGSHIP / PERSONAL" data-ko="01 / FLAGSHIP / PERSONAL">01 / FLAGSHIP / PERSONAL</div>
           <h2>SLOTQ</h2>
-          <p>A reservation, queue, and venue operations platform built around concurrency, state transitions, and reliable backend workflows.</p>
+          <p
+            data-en="A reservation, queue, and venue operations platform built around concurrency, state transitions, and reliable backend workflows."
+            data-ko="동시성, 상태 전이, 신뢰 가능한 백엔드 워크플로를 중심으로 설계한 예약·대기열·매장 운영 플랫폼입니다."
+          >A reservation, queue, and venue operations platform built around concurrency, state transitions, and reliable backend workflows.</p>
           <dl class="project-meta mono">
-            <div><dt>ROLE</dt><dd>BACKEND</dd></div>
+            <div><dt data-en="ROLE" data-ko="ROLE">ROLE</dt><dd>BACKEND</dd></div>
             <div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div>
-            <div><dt>FOCUS</dt><dd>CONSISTENCY / EVENTS / OPERATIONS</dd></div>
+            <div><dt data-en="FOCUS" data-ko="FOCUS">FOCUS</dt><dd>CONSISTENCY / EVENTS / OPERATIONS</dd></div>
           </dl>
-          <a class="project-link mono" href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer">VIEW REPOSITORY ↗</a>
+          <a class="project-link mono" href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">VIEW REPOSITORY ↗</a>
         </div>
         <ProjectVisual kind="slotq" />
       </article>
@@ -48,28 +65,34 @@ import ProjectVisual from '../components/ProjectVisual.astro';
       <div class="project-list">
         <article class="project project-row" data-project="uctale">
           <div class="project-copy">
-            <div class="project-kicker mono">02 / PERSONAL</div>
+            <div class="project-kicker mono" data-en="02 / PERSONAL" data-ko="02 / PERSONAL">02 / PERSONAL</div>
             <h2>UCTALE</h2>
-            <p>An AI text-adventure backend where game rules and canonical state remain server-owned while models handle narrative generation.</p>
+            <p
+              data-en="An AI text-adventure backend where game rules and canonical state remain server-owned while models handle narrative generation."
+              data-ko="게임 규칙과 canonical state는 서버가 소유하고, 모델은 내러티브 생성을 담당하도록 경계를 설계한 AI 텍스트 어드벤처 백엔드입니다."
+            >An AI text-adventure backend where game rules and canonical state remain server-owned while models handle narrative generation.</p>
             <dl class="project-meta mono">
-              <div><dt>ROLE</dt><dd>BACKEND</dd></div>
-              <div><dt>FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div>
+              <div><dt data-en="ROLE" data-ko="ROLE">ROLE</dt><dd>BACKEND</dd></div>
+              <div><dt data-en="FOCUS" data-ko="FOCUS">FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div>
             </dl>
-            <a class="project-link mono" href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer">VIEW REPOSITORY ↗</a>
+            <a class="project-link mono" href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">VIEW REPOSITORY ↗</a>
           </div>
           <ProjectVisual kind="uctale" />
         </article>
 
         <article class="project project-row" data-project="fowoco">
           <div class="project-copy">
-            <div class="project-kicker mono">03 / COLLABORATIVE</div>
+            <div class="project-kicker mono" data-en="03 / COLLABORATIVE" data-ko="03 / COLLABORATIVE">03 / COLLABORATIVE</div>
             <h2>FOWOCO</h2>
-            <p>A collaborative HR workflow backend. My work focused on PostgreSQL, row-level security, settings, demo data, and database operational safety.</p>
+            <p
+              data-en="A collaborative HR workflow backend. My work focused on PostgreSQL, row-level security, settings, demo data, and database operational safety."
+              data-ko="E-9 고용 사업장을 위한 HR 워크플로 백엔드 팀 프로젝트입니다. PostgreSQL, RLS, 설정, 데모 데이터와 데이터베이스 운영 안전성을 담당했습니다."
+            >A collaborative HR workflow backend. My work focused on PostgreSQL, row-level security, settings, demo data, and database operational safety.</p>
             <dl class="project-meta mono">
-              <div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div>
-              <div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div>
+              <div><dt data-en="ROLE" data-ko="ROLE">ROLE</dt><dd>BACKEND / DATABASE</dd></div>
+              <div><dt data-en="FOCUS" data-ko="FOCUS">FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div>
             </dl>
-            <a class="project-link mono" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer">VIEW REPOSITORY ↗</a>
+            <a class="project-link mono" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">VIEW REPOSITORY ↗</a>
           </div>
           <ProjectVisual kind="fowoco" />
         </article>
@@ -78,7 +101,7 @@ import ProjectVisual from '../components/ProjectVisual.astro';
 
     <section id="education" class="section education" data-section>
       <div class="section-heading">
-        <span class="mono">02 / EDUCATION & PROGRAMS</span>
+        <span class="mono" data-en="02 / EDUCATION & PROGRAMS" data-ko="02 / EDUCATION & PROGRAMS">02 / EDUCATION & PROGRAMS</span>
         <span class="mono">2020 — 2026</span>
       </div>
       <div class="timeline">
@@ -99,8 +122,8 @@ import ProjectVisual from '../components/ProjectVisual.astro';
 
     <section id="contact" class="section contact" data-section>
       <div class="section-heading">
-        <span class="mono">03 / CONTACT</span>
-        <span class="mono">OPEN LINKS</span>
+        <span class="mono" data-en="03 / CONTACT" data-ko="03 / CONTACT">03 / CONTACT</span>
+        <span class="mono" data-en="OPEN LINKS" data-ko="OPEN LINKS">OPEN LINKS</span>
       </div>
       <div class="contact-grid">
         <a href="https://github.com/krestar" target="_blank" rel="noreferrer">

@@ -3,17 +3,17 @@ const { kind = 'slotq' } = Astro.props;
 
 const config = {
   slotq: {
-    label: 'SlotQ flow: reservation, waitlist, events, and recovery',
+    label: 'SlotQ flow: reservation branches into waitlist and event handling, then converges on recovery-aware operations',
     index: '01 / PRODUCT FLOW',
     nodes: ['RESERVATION', 'WAITLIST', 'EVENT', 'RECOVERY']
   },
   uctale: {
-    label: 'UCTale flow: turn, state, memory, and LLM narrative',
+    label: 'UCTale flow: turn processing branches into state and memory, then converges on LLM narrative generation',
     index: '02 / GAME STATE',
     nodes: ['TURN', 'STATE', 'MEMORY', 'LLM']
   },
   fowoco: {
-    label: 'FOWOCO data boundary: tenant, RLS, PostgreSQL, and timeout protection',
+    label: 'FOWOCO flow: tenant context branches into RLS and PostgreSQL controls, then converges on timeout-safe operations',
     index: '03 / DATA BOUNDARY',
     nodes: ['TENANT', 'RLS', 'POSTGRESQL', 'TIMEOUT']
   }
@@ -24,13 +24,23 @@ const config = {
 };
 ---
 <div class:list={['system-visual', kind !== 'slotq' && 'compact', kind === 'fowoco' && 'muted']} role="img" aria-label={config.label}>
+  <svg class="system-routes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="route-base" d="M27 25 H73" pathLength="100" />
+    <path class="route-base" d="M20 32 V68" pathLength="100" />
+    <path class="route-base" d="M27 75 H73" pathLength="100" />
+    <path class="route-base" d="M80 32 V68" pathLength="100" />
+
+    <path class="route-signal route-signal-1" d="M27 25 H73" pathLength="100" />
+    <path class="route-signal route-signal-2" d="M20 32 V68" pathLength="100" />
+    <path class="route-signal route-signal-3" d="M27 75 H73" pathLength="100" />
+    <path class="route-signal route-signal-4" d="M80 32 V68" pathLength="100" />
+  </svg>
+
   <span class="node node-a">{config.nodes[0]}</span>
   <span class="node node-b">{config.nodes[1]}</span>
   <span class="node node-c">{config.nodes[2]}</span>
   <span class="node node-d">{config.nodes[3]}</span>
-  <span class="path path-ab" aria-hidden="true"><span class="signal signal-one"></span></span>
-  <span class="path path-ac" aria-hidden="true"><span class="signal signal-two"></span></span>
-  <span class="path path-cd" aria-hidden="true"><span class="signal signal-three"></span></span>
+
   <span class="diagram-cursor" aria-hidden="true"><span class="diagram-cursor-x"></span><span class="diagram-cursor-y"></span></span>
   <span class="diagram-readout mono" data-diagram-readout aria-hidden="true">IDLE / {config.nodes[0]}</span>
   <span class="visual-index" aria-hidden="true">{config.index}</span>

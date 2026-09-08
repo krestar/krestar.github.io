@@ -1,0 +1,39 @@
+---
+const { kind = 'slotq' } = Astro.props;
+---
+{kind === 'slotq' && (
+  <div class="system-visual" aria-label="SlotQ system concept">
+    <span class="node node-a">RESERVATION</span>
+    <span class="node node-b">QUEUE</span>
+    <span class="node node-c">OPERATIONS</span>
+    <span class="node node-d">DATA</span>
+    <span class="path path-ab"></span>
+    <span class="path path-ac"></span>
+    <span class="path path-cd"></span>
+    <span class="visual-index">01 / SYSTEM FLOW</span>
+  </div>
+)}
+{kind === 'uctale' && (
+  <div class="system-visual compact" aria-label="UCTale system concept">
+    <span class="node node-a">ACTION</span>
+    <span class="node node-b">RULES</span>
+    <span class="node node-c">STATE</span>
+    <span class="node node-d">NARRATIVE</span>
+    <span class="path path-ab"></span>
+    <span class="path path-ac"></span>
+    <span class="path path-cd"></span>
+    <span class="visual-index">02 / SERVER-OWNED STATE</span>
+  </div>
+)}
+{kind === 'fowoco' && (
+  <div class="system-visual compact muted" aria-label="FOWOCO system concept">
+    <span class="node node-a">POSTGRESQL</span>
+    <span class="node node-b">RLS</span>
+    <span class="node node-c">TENANT</span>
+    <span class="node node-d">SAFETY</span>
+    <span class="path path-ab"></span>
+    <span class="path path-ac"></span>
+    <span class="path path-cd"></span>
+    <span class="visual-index">03 / DATA BOUNDARY</span>
+  </div>
+)}

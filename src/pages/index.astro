@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectVisual from '../components/ProjectVisual.astro';
+---
+<BaseLayout>
+  <main>
+    <header class="site-nav">
+      <a class="wordmark" href="#top">KRESTAR <span>/ BACKEND ENGINEER</span></a>
+      <nav aria-label="Primary">
+        <a data-nav href="#work">WORK</a>
+        <a data-nav href="#education">EDUCATION</a>
+        <a data-nav href="#contact">CONTACT</a>
+      </nav>
+    </header>
+
+    <section id="top" class="hero" data-section>
+      <div class="hero-gridline" aria-hidden="true"></div>
+      <div class="hero-meta mono">2026 / KR</div>
+      <h1>BACKEND SYSTEMS<br />FOR PRODUCT LOGIC,<br />DATA, AND OPERATIONS.</h1>
+      <p class="hero-profile">Backend-focused software engineer working across<br class="desktop-break" /> product systems, data, and AI-enabled workflows.</p>
+      <div class="hero-footer mono">
+        <a href="#work">WORK / 03 <span>↓</span></a>
+        <a href="https://github.com/krestar" target="_blank" rel="noreferrer">GITHUB ↗</a>
+      </div>
+    </section>
+
+    <section id="work" class="section work" data-section>
+      <div class="section-heading">
+        <span class="mono">01 / SELECTED WORK</span>
+        <span class="mono">03 PROJECTS</span>
+      </div>
+
+      <article class="project project-featured" data-project="slotq">
+        <div class="project-copy">
+          <div class="project-kicker mono">01 / FLAGSHIP / PERSONAL</div>
+          <h2>SLOTQ</h2>
+          <p>A reservation, queue, and venue operations platform built around concurrency, state transitions, and reliable backend workflows.</p>
+          <dl class="project-meta mono">
+            <div><dt>ROLE</dt><dd>BACKEND</dd></div>
+            <div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div>
+            <div><dt>FOCUS</dt><dd>CONSISTENCY / EVENTS / OPERATIONS</dd></div>
+          </dl>
+          <a class="project-link mono" href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer">VIEW REPOSITORY ↗</a>
+        </div>
+        <ProjectVisual kind="slotq" />
+      </article>
+
+      <div class="project-list">
+        <article class="project project-row" data-project="uctale">
+          <div class="project-copy">
+            <div class="project-kicker mono">02 / PERSONAL</div>
+            <h2>UCTALE</h2>
+            <p>An AI text-adventure backend where game rules and canonical state remain server-owned while models handle narrative generation.</p>
+            <dl class="project-meta mono">
+              <div><dt>ROLE</dt><dd>BACKEND</dd></div>
+              <div><dt>FOCUS</dt><dd>STATE / IDEMPOTENCY / AI BOUNDARY</dd></div>
+            </dl>
+            <a class="project-link mono" href="https://github.com/krestar/uctale" target="_blank" rel="noreferrer">VIEW REPOSITORY ↗</a>
+          </div>
+          <ProjectVisual kind="uctale" />
+        </article>
+
+        <article class="project project-row" data-project="fowoco">
+          <div class="project-copy">
+            <div class="project-kicker mono">03 / COLLABORATIVE</div>
+            <h2>FOWOCO</h2>
+            <p>A collaborative HR workflow backend. My work focused on PostgreSQL, row-level security, settings, demo data, and database operational safety.</p>
+            <dl class="project-meta mono">
+              <div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div>
+              <div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / DATA SAFETY</dd></div>
+            </dl>
+            <a class="project-link mono" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer">VIEW REPOSITORY ↗</a>
+          </div>
+          <ProjectVisual kind="fowoco" />
+        </article>
+      </div>
+    </section>
+
+    <section id="education" class="section education" data-section>
+      <div class="section-heading">
+        <span class="mono">02 / EDUCATION & PROGRAMS</span>
+        <span class="mono">2020 — 2026</span>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-date mono">2020 — 2026</div>
+          <div><h3>B.S. IN SOFTWARE ENGINEERING</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date mono">2025.10 — 2026.01</div>
+          <div><h3>WOOWACOURSE PRECOURSE</h3><p class="mono">BACKEND</p></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date mono">2026.03 — 2026.09</div>
+          <div><h3>KT AIVLE SCHOOL</h3><p class="mono">AI DEVELOPER</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact" data-section>
+      <div class="section-heading">
+        <span class="mono">03 / CONTACT</span>
+        <span class="mono">OPEN LINKS</span>
+      </div>
+      <div class="contact-grid">
+        <a href="https://github.com/krestar" target="_blank" rel="noreferrer">
+          <span class="mono">GITHUB</span>
+          <strong>github.com/krestar</strong>
+          <span>↗</span>
+        </a>
+        <a href="mailto:krestar.dev@gmail.com">
+          <span class="mono">EMAIL</span>
+          <strong>krestar.dev@gmail.com</strong>
+          <span>↗</span>
+        </a>
+      </div>
+      <footer class="site-footer mono">
+        <span>KRESTAR / 2026</span>
+        <span>NO TRACKING. NO COOKIES.</span>
+      </footer>
+    </section>
+  </main>
+</BaseLayout>

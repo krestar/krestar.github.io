@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+const {
+  title = 'Krestar / Backend Engineer',
+  description = 'Backend-focused software engineer working across product systems, data, and AI-enabled workflows.'
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3f2ed" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://krestar.github.io/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      const root = document.documentElement;
+      const updatePointer = (event) => {
+        root.style.setProperty('--pointer-x', `${event.clientX}px`);
+        root.style.setProperty('--pointer-y', `${event.clientY}px`);
+      };
+      window.addEventListener('pointermove', updatePointer, { passive: true });
+
+      const sections = [...document.querySelectorAll('[data-section]')];
+      const navLinks = [...document.querySelectorAll('[data-nav]')];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => {
+            link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`);
+          });
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
+      sections.forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>

@@ -66,8 +66,8 @@ main::after { content: ""; display: block; height: var(--nav-height); pointer-ev
 
 @media (min-width: 1200px) {
   html[lang="ko"] .hero-profile,
-  html[lang="ko"] .project-description .sentence,
   html[lang="ko"] .focus-summary .sentence { white-space: nowrap; }
+  html[lang="ko"] .project-description .sentence { white-space: normal; }
   .project-featured,.project-row { grid-template-columns:minmax(0,1.08fr) minmax(430px,.92fr); gap:clamp(2.5rem,4vw,5.5rem); }
   .project-copy { min-width:0; }
   .system-visual { max-width:690px; justify-self:end; }

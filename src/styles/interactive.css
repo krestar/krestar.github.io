@@ -35,6 +35,50 @@ html {
   background: var(--blue);
 }
 
+
+.global-pointer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+
+.global-pointer.is-visible { opacity: 1; }
+
+.global-pointer-x,
+.global-pointer-y {
+  position: absolute;
+  background: var(--blue);
+  opacity: .16;
+}
+
+.global-pointer-x {
+  left: 0;
+  right: 0;
+  top: var(--global-pointer-y, 50vh);
+  height: 1px;
+}
+
+.global-pointer-y {
+  top: 0;
+  bottom: 0;
+  left: var(--global-pointer-x, 50vw);
+  width: 1px;
+}
+
+.global-pointer-dot {
+  position: absolute;
+  left: var(--global-pointer-x, 50vw);
+  top: var(--global-pointer-y, 50vh);
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--blue);
+  background: var(--bg);
+  transform: translate(-50%, -50%);
+}
+
 .wordmark::after {
   content: "";
   display: inline-block;
@@ -328,20 +372,9 @@ html[lang="en"] .hero-profile {
   transition: width .28s cubic-bezier(.2,.75,.2,1);
 }
 
-.focus-item::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--focus-x);
-  width: 1px;
-  background: var(--blue);
-  opacity: 0;
-  transition: opacity .16s ease;
-}
+.focus-item::after { display: none; }
 
 .focus-item:hover::before { width: 100%; }
-.focus-item:hover::after { opacity: .14; }
 
 .focus-index {
   color: var(--blue);
@@ -686,6 +719,7 @@ html[lang="ko"] .focus-item p {
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; }
-  .hero-pointer { display: none; }
+  .hero-pointer,
+  .global-pointer { display: none; }
   .signal { animation: none; }
 }

@@ -6,7 +6,7 @@ import '../styles/refinement.css';
 
 const {
   title = 'Krestar / 백엔드 개발자',
-  description = '데이터 정합성, 동시성, 장애 복구와 권한 경계를 다루고 AI를 실제 제품 기능에 안전하게 연결하는 백엔드 개발자입니다.',
+  description = '동시 요청과 재시도, 장애 이후 복구처럼 데이터가 흔들릴 수 있는 상황을 직접 재현하고 확인하는 백엔드 개발자입니다.',
   robots = 'index, follow'
 } = Astro.props;
 
@@ -292,8 +292,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://krestar.git
         if (document.querySelector('[data-section]')) {
           document.title = next === 'ko' ? 'Krestar / 백엔드 개발자' : 'Krestar / Backend Developer';
           if (descriptionMeta) descriptionMeta.setAttribute('content', next === 'ko'
-            ? '데이터 정합성, 동시성, 장애 복구와 권한 경계를 다루고 AI를 실제 제품 기능에 안전하게 연결하는 백엔드 개발자입니다.'
-            : 'Backend developer focused on data integrity, concurrency, failure recovery, authorization boundaries, and safe AI integration.');
+            ? '동시 요청과 재시도, 장애 이후 복구처럼 데이터가 흔들릴 수 있는 상황을 직접 재현하고 확인하는 백엔드 개발자입니다.'
+            : 'Backend developer who reproduces concurrent requests, retries, and failure recovery paths to verify how systems behave beyond the happy path.');
           if (ogLocale) ogLocale.setAttribute('content', next === 'ko' ? 'ko_KR' : 'en_US');
         }
         if (persist) {

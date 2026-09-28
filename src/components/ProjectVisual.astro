@@ -3,45 +3,112 @@ const { kind = 'slotq' } = Astro.props;
 
 const config = {
   slotq: {
-    label: 'SlotQ flow: reservation branches into waitlist and event handling, then converges on recovery-aware operations',
-    index: '01 / PRODUCT FLOW',
-    nodes: ['RESERVATION', 'WAITLIST', 'EVENT', 'RECOVERY']
+    label: 'SlotQ concurrency scenario: two requests compete for the last available capacity, one commits and the other is rejected',
+    index: '01 / CONCURRENCY',
+    title: 'LAST CAPACITY'
   },
   uctale: {
-    label: 'UCTale flow: turn processing branches into state and memory, then converges on LLM narrative generation',
-    index: '02 / GAME STATE',
-    nodes: ['TURN', 'STATE', 'MEMORY', 'LLM']
+    label: 'UCTale decision boundary: the server resolves game state first and passes the confirmed result to the LLM for narrative generation',
+    index: '02 / AI BOUNDARY',
+    title: 'SERVER → NARRATIVE'
   },
   fowoco: {
-    label: 'FOWOCO flow: tenant context branches into RLS and PostgreSQL controls, then converges on timeout-safe operations',
-    index: '03 / DATA BOUNDARY',
-    nodes: ['TENANT', 'RLS', 'POSTGRESQL', 'TIMEOUT']
+    label: 'FOWOCO tenant isolation scenario: PostgreSQL row level security filters another workplace data and blocks cross-tenant access',
+    index: '03 / DATA ISOLATION',
+    title: 'TENANT A / RLS'
   }
 }[kind] ?? {
-  label: 'System flow',
-  index: 'SYSTEM FLOW',
-  nodes: ['INPUT', 'STATE', 'PROCESS', 'OUTPUT']
+  label: 'Backend engineering scenario',
+  index: 'SYSTEM',
+  title: 'SCENARIO'
 };
 ---
-<div class:list={['system-visual', kind !== 'slotq' && 'compact', kind === 'fowoco' && 'muted']} role="img" aria-label={config.label}>
-  <svg class="system-routes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <path class="route-base" d="M27 25 H73" pathLength="100" />
-    <path class="route-base" d="M20 32 V68" pathLength="100" />
-    <path class="route-base" d="M27 75 H73" pathLength="100" />
-    <path class="route-base" d="M80 32 V68" pathLength="100" />
 
-    <path class="route-signal route-signal-1" d="M27 25 H73" pathLength="100" />
-    <path class="route-signal route-signal-2" d="M20 32 V68" pathLength="100" />
-    <path class="route-signal route-signal-3" d="M27 75 H73" pathLength="100" />
-    <path class="route-signal route-signal-4" d="M80 32 V68" pathLength="100" />
-  </svg>
+<div class:list={['scenario-visual', `scenario-${kind}`]} role="img" aria-label={config.label}>
+  <div class="scenario-head mono" aria-hidden="true">
+    <span>{config.index}</span>
+    <span>{config.title}</span>
+  </div>
 
-  <span class="node node-a">{config.nodes[0]}</span>
-  <span class="node node-b">{config.nodes[1]}</span>
-  <span class="node node-c">{config.nodes[2]}</span>
-  <span class="node node-d">{config.nodes[3]}</span>
+  {kind === 'slotq' && (
+    <div class="scenario-body race-scene" aria-hidden="true">
+      <div class="race-request race-request-a">
+        <span class="scenario-label">REQUEST A</span>
+        <strong>HOLD</strong>
+      </div>
 
-  <span class="diagram-cursor" aria-hidden="true"><span class="diagram-cursor-x"></span><span class="diagram-cursor-y"></span></span>
-  <span class="diagram-readout mono" data-diagram-readout aria-hidden="true">IDLE / {config.nodes[0]}</span>
-  <span class="visual-index" aria-hidden="true">{config.index}</span>
+      <div class="race-resource">
+        <span class="scenario-label">TABLE × SLOT</span>
+        <strong class="capacity-number">1</strong>
+        <span class="capacity-state capacity-available">AVAILABLE</span>
+        <span class="capacity-state capacity-locked">ROW LOCK</span>
+        <span class="capacity-state capacity-confirmed">CONFIRMED</span>
+      </div>
+
+      <div class="race-request race-request-b">
+        <span class="scenario-label">REQUEST B</span>
+        <strong>HOLD</strong>
+      </div>
+
+      <span class="race-line race-line-a"></span>
+      <span class="race-line race-line-b"></span>
+      <span class="race-packet race-packet-a">A</span>
+      <span class="race-packet race-packet-b">B</span>
+
+      <div class="race-result race-result-a">A / CONFIRMED</div>
+      <div class="race-result race-result-b">B / CAPACITY_UNAVAILABLE</div>
+    </div>
+  )}
+
+  {kind === 'uctale' && (
+    <div class="scenario-body boundary-scene" aria-hidden="true">
+      <section class="boundary-side boundary-server">
+        <div class="boundary-title mono">SERVER</div>
+        <div class="action-chip">USER ACTION</div>
+        <div class="state-card">
+          <span><em>D20</em><strong>13</strong></span>
+          <span><em>DC</em><strong>12</strong></span>
+          <span><em>RESULT</em><strong>SUCCESS</strong></span>
+          <span><em>STATE</em><strong>COMMITTED</strong></span>
+        </div>
+      </section>
+
+      <div class="boundary-divider">
+        <span class="result-packet">GameResult</span>
+      </div>
+
+      <section class="boundary-side boundary-llm">
+        <div class="boundary-title mono">LLM</div>
+        <div class="narrative-card">
+          <span><em>title</em><i></i></span>
+          <span><em>story_text</em><i></i></span>
+          <span><em>choices[]</em><i></i></span>
+        </div>
+        <div class="boundary-note mono">STATE FIELDS / NONE</div>
+      </section>
+    </div>
+  )}
+
+  {kind === 'fowoco' && (
+    <div class="scenario-body rls-scene" aria-hidden="true">
+      <div class="tenant-context mono"><span>CONTEXT</span><strong>TENANT A</strong></div>
+
+      <div class="rls-table">
+        <div class="rls-row rls-head"><span>COMPANY</span><span>WORKER</span><span>ACCESS</span></div>
+        <div class="rls-row tenant-a"><span>A</span><span>worker_01</span><strong>VISIBLE</strong></div>
+        <div class="rls-row tenant-a"><span>A</span><span>worker_02</span><strong>VISIBLE</strong></div>
+        <div class="rls-row tenant-b"><span>B</span><span>worker_03</span><strong>FILTERED</strong></div>
+        <div class="rls-row tenant-b"><span>B</span><span>worker_04</span><strong>FILTERED</strong></div>
+      </div>
+
+      <div class="rls-query mono">SELECT worker_03 / TENANT A</div>
+      <div class="rls-block mono">BLOCKED BY RLS</div>
+    </div>
+  )}
+
+  <div class="scenario-foot">
+    {kind === 'slotq' && <span data-ko="마지막 한 자리에 동시에 들어온 두 요청을 한 결과로 수렴시킵니다." data-en="Two requests compete for the last capacity; only one result commits.">마지막 한 자리에 동시에 들어온 두 요청을 한 결과로 수렴시킵니다.</span>}
+    {kind === 'uctale' && <span data-ko="상태와 판정은 서버가 먼저 확정하고, LLM은 확정 결과를 서술합니다." data-en="The server resolves state first; the LLM narrates the confirmed result.">상태와 판정은 서버가 먼저 확정하고, LLM은 확정 결과를 서술합니다.</span>}
+    {kind === 'fowoco' && <span data-ko="애플리케이션 조건 위에 RLS를 두어 다른 사업장 행을 DB에서도 차단합니다." data-en="RLS adds a database-level barrier on top of application tenant checks.">애플리케이션 조건 위에 RLS를 두어 다른 사업장 행을 DB에서도 차단합니다.</span>}
+  </div>
 </div>

@@ -36,7 +36,7 @@ import ProjectVisual from '../components/ProjectVisual.astro';
           <span data-en="BUILDING RELIABLE" data-ko="제품 시스템을 만드는">제품 시스템을 만드는</span>
           <span data-en="PRODUCT SYSTEMS." data-ko="백엔드 개발자입니다.">백엔드 개발자입니다.</span>
         </h1>
-        <p class="hero-profile" data-reveal data-en="I do not assume a system will hold up; I reproduce concurrent requests, retries, and recovery paths and verify what actually happens." data-ko="될 것이라고 가정하지 않고 직접 확인합니다. 동시 요청과 재시도, 장애 이후 복구처럼 데이터가 흔들릴 수 있는 상황을 직접 재현하고 확인하며 백엔드를 만듭니다.">될 것이라고 가정하지 않고 직접 확인합니다. 동시 요청과 재시도, 장애 이후 복구처럼 데이터가 흔들릴 수 있는 상황을 직접 재현하고 확인하며 백엔드를 만듭니다.</p>
+        <p class="hero-profile" data-reveal data-en="I do not assume a system will hold up. I reproduce concurrent requests, retries, and recovery paths, then leave the result in tests and records." data-ko="될 것이라고 가정하지 않고 직접 확인합니다. 동시 요청과 재시도, 장애 이후 복구처럼 데이터가 흔들릴 수 있는 상황을 직접 재현하고 결과를 테스트와 기록으로 남깁니다.">될 것이라고 가정하지 않고 직접 확인합니다. 동시 요청과 재시도, 장애 이후 복구처럼 데이터가 흔들릴 수 있는 상황을 직접 재현하고 결과를 테스트와 기록으로 남깁니다.</p>
       </div>
 
       <div class="hero-signals mono" aria-hidden="true" data-reveal>
@@ -84,7 +84,7 @@ import ProjectVisual from '../components/ProjectVisual.astro';
         </article>
         <article class="focus-item" data-focus-item data-reveal>
           <span class="focus-index mono">04</span>
-          <div><h3>AI IN PRODUCT</h3><p data-en="AI can generate narrative or suggestions, but I keep important state and final decisions on the server and validate model output against that state." data-ko="AI가 이야기나 제안을 만들 수는 있어도 중요한 상태와 최종 판단까지 맡기지는 않습니다. 서버가 기준 상태를 가지고 결과를 검증하는 구조를 선호합니다.">AI가 이야기나 제안을 만들 수는 있어도 중요한 상태와 최종 판단까지 맡기지는 않습니다. 서버가 기준 상태를 가지고 결과를 검증하는 구조를 선호합니다.</p></div>
+          <div><h3>AI IN PRODUCT</h3><p data-en="Important state and decisions are resolved by the server first; the LLM is given the confirmed result to turn into narrative." data-ko="중요한 상태와 판정은 서버가 먼저 확정하고, LLM에는 확정된 결과를 서술하는 역할만 맡깁니다.">중요한 상태와 판정은 서버가 먼저 확정하고, LLM에는 확정된 결과를 서술하는 역할만 맡깁니다.</p></div>
           <span class="focus-code mono">AI-ENABLED</span>
         </article>
       </div>
@@ -98,8 +98,8 @@ import ProjectVisual from '../components/ProjectVisual.astro';
           <div class="project-kicker mono" data-reveal>01 / PERSONAL</div>
           <h2 data-reveal>SLOTQ</h2>
           <p class="project-description">
-            <span class="sentence" data-reveal data-en="I am building a reservation and waitlist backend around concurrent requests, state transitions, event delivery, and failure recovery." data-ko="실시간 예약과 대기열을 구현하면서 동시 요청, 상태 전이, 이벤트 전달과 장애 복구를 다루고 있습니다.">실시간 예약과 대기열을 구현하면서 동시 요청, 상태 전이, 이벤트 전달과 장애 복구를 다루고 있습니다.</span>
-            <span class="sentence" data-reveal data-en="I reproduced contention for the last available resource in MySQL, connected reservation events to waitlist promotion, and am now adding metrics to see where requests and events slow down or fail." data-ko="마지막 하나의 자원에 여러 요청이 몰리는 상황을 실제 MySQL에서 재현했고, 예약 이벤트를 대기 승급까지 연결했습니다. 최근에는 요청과 이벤트가 어디에서 지연되거나 실패하는지 볼 수 있도록 관측 지표를 추가하고 있습니다.">마지막 하나의 자원에 여러 요청이 몰리는 상황을 실제 MySQL에서 재현했고, 예약 이벤트를 대기 승급까지 연결했습니다. 최근에는 요청과 이벤트가 어디에서 지연되거나 실패하는지 볼 수 있도록 관측 지표를 추가하고 있습니다.</span>
+            <span class="sentence" data-reveal data-en="I am building a reservation and waitlist backend around concurrent requests, state transitions, event delivery, and failure recovery." data-ko="예약과 대기열을 구현하면서 동시 요청, 상태 전이, 이벤트 전달과 장애 복구를 다루고 있습니다.">예약과 대기열을 구현하면서 동시 요청, 상태 전이, 이벤트 전달과 장애 복구를 다루고 있습니다.</span>
+            <span class="sentence" data-reveal data-en="I reproduced contention for the last available resource in MySQL and connected reservation events to waitlist promotion. I also added tracing and metrics for request flow, backlog, and failed delivery states." data-ko="마지막 하나의 자원에 여러 요청이 몰리는 상황을 실제 MySQL에서 재현했고, 예약 이벤트를 대기 승급까지 연결했습니다. 요청과 이벤트의 처리 흐름을 추적하고, 처리 대기량과 실패 상태를 관측할 수 있는 지표도 추가했습니다.">마지막 하나의 자원에 여러 요청이 몰리는 상황을 실제 MySQL에서 재현했고, 예약 이벤트를 대기 승급까지 연결했습니다. 요청과 이벤트의 처리 흐름을 추적하고, 처리 대기량과 실패 상태를 관측할 수 있는 지표도 추가했습니다.</span>
           </p>
           <dl class="project-meta mono" data-reveal><div><dt>STACK</dt><dd>JAVA / SPRING BOOT / MYSQL</dd></div><div><dt>FOCUS</dt><dd>CONCURRENCY / EVENTS / RECOVERY</dd></div></dl>
           <a class="project-link mono" data-reveal href="https://github.com/krestar/slotq" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
@@ -129,9 +129,9 @@ import ProjectVisual from '../components/ProjectVisual.astro';
             <p class="project-description">
               <span class="sentence" data-reveal data-en="A collaborative HR workflow platform for E-9 worker residency, contracts, and documents." data-ko="E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 프로젝트입니다.">E-9 외국인근로자의 체류·계약·서류 업무를 관리하는 HR 워크플로 프로젝트입니다.</span>
               <span class="sentence" data-reveal data-en="I was responsible for PostgreSQL RLS-based isolation so data from different workplaces could not cross tenant boundaries." data-ko="사업장마다 데이터가 섞이지 않도록 PostgreSQL RLS 기반 격리를 맡았습니다.">사업장마다 데이터가 섞이지 않도록 PostgreSQL RLS 기반 격리를 맡았습니다.</span>
-              <span class="sentence" data-reveal data-en="After enabling RLS broke profile reads and demo-data creation, I reproduced the failures on PostgreSQL, fixed them, and also worked on database timeouts and settings APIs." data-ko="RLS 적용 뒤 프로필 조회와 데모 데이터 생성이 깨지는 문제를 실제 PostgreSQL에서 다시 재현해 수정했고, DB 타임아웃과 설정 API 같은 운영 경계도 함께 다뤘습니다.">RLS 적용 뒤 프로필 조회와 데모 데이터 생성이 깨지는 문제를 실제 PostgreSQL에서 다시 재현해 수정했고, DB 타임아웃과 설정 API 같은 운영 경계도 함께 다뤘습니다.</span>
+              <span class="sentence" data-reveal data-en="After RLS activation caused profile requests to fail, I reproduced the 500 error on PostgreSQL and fixed the missing tenant context. For uploads that change both database state and files, I also added rollback compensation and idempotency." data-ko="RLS 활성화 후 프로필 조회에서 발생한 500 오류를 실제 PostgreSQL에서 재현해 누락된 tenant context를 수정했습니다. DB와 파일 저장이 함께 바뀌는 업로드에는 rollback 보상과 멱등성도 적용했습니다.">RLS 활성화 후 프로필 조회에서 발생한 500 오류를 실제 PostgreSQL에서 재현해 누락된 tenant context를 수정했습니다. DB와 파일 저장이 함께 바뀌는 업로드에는 rollback 보상과 멱등성도 적용했습니다.</span>
             </p>
-            <dl class="project-meta mono" data-reveal><div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div><div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / DATA ISOLATION</dd></div></dl>
+            <dl class="project-meta mono" data-reveal><div><dt>ROLE</dt><dd>BACKEND / DATABASE</dd></div><div><dt>FOCUS</dt><dd>POSTGRESQL / RLS / PARTIAL FAILURE</dd></div></dl>
             <div class="project-links mono" data-reveal>
               <a class="project-link" href="https://github.com/fowoco/server" target="_blank" rel="noreferrer" data-en="VIEW REPOSITORY ↗" data-ko="REPOSITORY 보기 ↗">REPOSITORY 보기 ↗</a>
               <a class="project-link" href="https://github.com/fowoco/server/pulls?q=is%3Apr+is%3Amerged+author%3Akrestar" target="_blank" rel="noreferrer" data-en="MERGED PRS ↗" data-ko="머지한 PR ↗">머지한 PR ↗</a>
